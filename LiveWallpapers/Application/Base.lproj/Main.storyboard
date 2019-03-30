@@ -87,10 +87,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mzc-Yc-HQO">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mzc-Yc-HQO">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BlP-sO-rO1">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BlP-sO-rO1" customClass="PHLivePhotoView">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
@@ -111,7 +111,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="0Z5-HN-7Lh"/>
                     <connections>
-                        <outlet property="imageView" destination="mzc-Yc-HQO" id="CJK-oE-E9o"/>
+                        <outlet property="imageView" destination="mzc-Yc-HQO" id="UAr-kL-OeJ"/>
                         <outlet property="livePhotoView" destination="BlP-sO-rO1" id="vq9-by-QAd"/>
                     </connections>
                 </viewController>
