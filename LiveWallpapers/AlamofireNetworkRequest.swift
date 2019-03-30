@@ -28,7 +28,6 @@ class AlamofireNetworkRequest {
                 if let array = value as? JSON, let data = array["data"] as? [JSON] {
                     
                     var photos = [Photo]()
-                    
                     for dictionary in data {
                         guard let forecast = Photo(json: dictionary) else { continue }
                         photos.append(forecast)
@@ -36,7 +35,6 @@ class AlamofireNetworkRequest {
                     }
                     print(photos)
                     completion(photos)
-                    
                 }
                 
             case .failure(let error):
