@@ -10,6 +10,9 @@ import UIKit
 import Photos
 import PhotosUI
 import Alamofire
+import MobileCoreServices
+import AVFoundation
+
 
 class LivePhotoViewController: UIViewController {
     
@@ -137,30 +140,58 @@ class LivePhotoViewController: UIViewController {
     }
     
     func prepareLivePhoto() {
-        makeLivePhotoFromItems { (livePhoto) in
-            self.livePhotoView.livePhoto = livePhoto
-            print("\nReady! Click on the LivePhoto in the Assistant Editor panel!\n")
-        }
+        makeLivePhotoFromItems()
     }
     
-    private func makeLivePhotoFromItems(completion: @escaping (PHLivePhoto) -> Void) {
+    private func makeLivePhotoFromItems() {
+//        private func makeLivePhotoFromItems(completion: @escaping (PHLivePhoto) -> Void) {
         guard let imageURL = self.imageURL, let videoURL = self.videoURL, let image = self.image else { return }
-        PHLivePhoto.request(withResourceFileURLs: [imageURL, videoURL], placeholderImage: image, targetSize: CGSize.zero, contentMode: .aspectFit) {
-            (livePhoto, infoDict) -> Void in
-            
-            if let canceled = infoDict[PHLivePhotoInfoCancelledKey] as? NSNumber,
-                canceled == 0,
-                let livePhoto = livePhoto
-            {
-                completion(livePhoto)
-            }
-        }
+//        PHLivePhoto.request(withResourceFileURLs: [imageURL, videoURL], placeholderImage: image, targetSize: CGSize.zero, contentMode: .aspectFit) {
+//            (livePhoto, infoDict) -> Void in
+//
+//            if let canceled = infoDict[PHLivePhotoInfoCancelledKey] as? NSNumber,
+//                canceled == 0,
+//                let livePhoto = livePhoto
+//            {
+        LivePhoto.generate(from: imageURL, videoURL: videoURL, progress: { percent in }, completion: { livePhoto, resources in
+            // Display the Live Photo in a PHLivePhotoView
+            self.livePhotoView.livePhoto = livePhoto
+            // Or save the resources to the Photo library
+//            LivePhoto.saveToLibrary(resources)
+//            completion(livePhoto)
+
+        })
+//            }
+        
     }
     
     
     override func viewWillDisappear(_ animated: Bool) {
         removeItem(itemName: "IMG", fileExtension: "JPG")
         removeItem(itemName: "MOVE", fileExtension: "MOV")
+    }
+    
+    func addAssetID(_ assetIdentifier: String, toImage imageURL: URL, saveTo destinationURL: URL) -> Bool {
+        guard let imageDestination = CGImageDestinationCreateWithURL(destinationURL as CFURL, kUTTypeJPEG, 1, nil),
+            let imageSource = CGImageSourceCreateWithURL(imageURL as CFURL, nil),
+            var imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [AnyHashable : Any] else { return false }
+        let assetIdentifierKey = "17"
+        let assetIdentifierInfo = [assetIdentifierKey : assetIdentifier]
+        imageProperties[kCGImagePropertyMakerAppleDictionary] = assetIdentifierInfo
+        CGImageDestinationAddImageFromSource(imageDestination, imageSource, 0, imageProperties as CFDictionary)
+        CGImageDestinationFinalize(imageDestination)
+        return true
+    }
+    
+    func metadataForAssetID(_ assetIdentifier: String) -> AVMetadataItem {
+        let item = AVMutableMetadataItem()
+        let keyContentIdentifier =  "com.apple.quicktime.content.identifier"
+        let keySpaceQuickTimeMetadata = "mdta"
+        item.key = keyContentIdentifier as (NSCopying & NSObjectProtocol)?
+        item.keySpace = AVMetadataKeySpace(rawValue: keySpaceQuickTimeMetadata)
+        item.value = assetIdentifier as (NSCopying & NSObjectProtocol)?
+        item.dataType = "com.apple.metadata.datatype.UTF-8"
+        return item
     }
     
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		183DD492224F9441002AE011 /* LivePhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183DD491224F9441002AE011 /* LivePhotoViewController.swift */; };
+		183DD49822503247002AE011 /* LivePhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183DD49722503247002AE011 /* LivePhoto.swift */; };
 		185117AD224F67670021CBB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185117AC224F67670021CBB1 /* AppDelegate.swift */; };
 		185117AF224F67670021CBB1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185117AE224F67670021CBB1 /* ViewController.swift */; };
 		185117B2224F67670021CBB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185117B0224F67670021CBB1 /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		183DD491224F9441002AE011 /* LivePhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePhotoViewController.swift; sourceTree = "<group>"; };
+		183DD49722503247002AE011 /* LivePhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LivePhoto.swift; sourceTree = "<group>"; };
 		185117A9224F67670021CBB1 /* LiveWallpapers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveWallpapers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		185117AC224F67670021CBB1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		185117AE224F67670021CBB1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				183DD491224F9441002AE011 /* LivePhotoViewController.swift */,
+				183DD49722503247002AE011 /* LivePhoto.swift */,
 			);
 			path = "Live Photo";
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 			files = (
 				185117BF224F67F10021CBB1 /* Photo.swift in Sources */,
 				185117C3224F6D050021CBB1 /* AlamofireNetworkRequest.swift in Sources */,
+				183DD49822503247002AE011 /* LivePhoto.swift in Sources */,
 				185117AF224F67670021CBB1 /* ViewController.swift in Sources */,
 				183DD492224F9441002AE011 /* LivePhotoViewController.swift in Sources */,
 				185117AD224F67670021CBB1 /* AppDelegate.swift in Sources */,
