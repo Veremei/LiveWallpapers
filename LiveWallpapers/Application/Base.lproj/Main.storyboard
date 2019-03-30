@@ -72,17 +72,17 @@
                     <navigationItem key="navigationItem" id="J7x-z9-ArC"/>
                     <connections>
                         <outlet property="collectionView" destination="wZ1-rl-F0F" id="sUC-K2-fdm"/>
-                        <segue destination="Z6l-Z6-QMZ" kind="show" id="vgr-4X-xdq"/>
+                        <segue destination="Z6l-Z6-QMZ" kind="show" identifier="showSegue" id="vgr-4X-xdq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1036" y="132.68365817091455"/>
         </scene>
-        <!--View Controller-->
+        <!--Live Photo View Controller-->
         <scene sceneID="mni-nr-31I">
             <objects>
-                <viewController id="Z6l-Z6-QMZ" sceneMemberID="viewController">
+                <viewController id="Z6l-Z6-QMZ" customClass="LivePhotoViewController" customModule="LiveWallpapers" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9D0-dN-SGa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -90,25 +90,30 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mzc-Yc-HQO">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ffI-nm-852" customClass="PHLivePhotoView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BlP-sO-rO1">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="mzc-Yc-HQO" firstAttribute="top" secondItem="OR4-Sz-kkN" secondAttribute="top" id="00z-Rf-viO"/>
-                            <constraint firstItem="OR4-Sz-kkN" firstAttribute="trailing" secondItem="ffI-nm-852" secondAttribute="trailing" id="6dE-ey-PWV"/>
-                            <constraint firstItem="ffI-nm-852" firstAttribute="top" secondItem="OR4-Sz-kkN" secondAttribute="top" id="NZc-Dt-OCA"/>
+                            <constraint firstItem="BlP-sO-rO1" firstAttribute="top" secondItem="OR4-Sz-kkN" secondAttribute="top" id="B44-VW-UB4"/>
+                            <constraint firstItem="BlP-sO-rO1" firstAttribute="leading" secondItem="OR4-Sz-kkN" secondAttribute="leading" id="Dkb-95-Njc"/>
                             <constraint firstItem="OR4-Sz-kkN" firstAttribute="trailing" secondItem="mzc-Yc-HQO" secondAttribute="trailing" id="Vcf-1F-2Gb"/>
+                            <constraint firstItem="OR4-Sz-kkN" firstAttribute="bottom" secondItem="BlP-sO-rO1" secondAttribute="bottom" id="YnF-uS-Ioo"/>
+                            <constraint firstItem="OR4-Sz-kkN" firstAttribute="trailing" secondItem="BlP-sO-rO1" secondAttribute="trailing" id="b7F-pS-wWV"/>
                             <constraint firstItem="mzc-Yc-HQO" firstAttribute="leading" secondItem="OR4-Sz-kkN" secondAttribute="leading" id="cor-1y-Vzt"/>
                             <constraint firstItem="OR4-Sz-kkN" firstAttribute="bottom" secondItem="mzc-Yc-HQO" secondAttribute="bottom" id="fg9-lZ-Mpm"/>
-                            <constraint firstItem="OR4-Sz-kkN" firstAttribute="bottom" secondItem="ffI-nm-852" secondAttribute="bottom" id="tiO-SI-xtm"/>
-                            <constraint firstItem="ffI-nm-852" firstAttribute="leading" secondItem="OR4-Sz-kkN" secondAttribute="leading" id="uH7-T1-xvn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OR4-Sz-kkN"/>
                     </view>
                     <navigationItem key="navigationItem" id="0Z5-HN-7Lh"/>
+                    <connections>
+                        <outlet property="imageView" destination="mzc-Yc-HQO" id="CJK-oE-E9o"/>
+                        <outlet property="livePhotoView" destination="BlP-sO-rO1" id="vq9-by-QAd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mkb-cz-dXF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
     private var photos = [Photo]()
     private let url = "https://wallpapers.mediacube.games/api/photos"
+//    private let videoUrl: String
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,12 +30,11 @@ class ViewController: UIViewController {
         }
     }
     
+    
     private func configureCell(cell: PhotoViewCell, for indexPath: IndexPath) {
         
         let photo = photos[indexPath.row]
         //        cell.imageView.image = photos.image
-        
-        
         
         DispatchQueue.global().async {
             guard let imageUrl = URL(string: photo.image!) else { return }
@@ -45,9 +45,19 @@ class ViewController: UIViewController {
                 cell.imageView.image = UIImage(data: imageData)
             }
         }
-        
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let livePhotoVC = segue.destination as! LivePhotoViewController
+//            livePhotoVC.videoURL =
+        
+//        livePhotoVC.selectedCourse = courseName
+        
+//        if let url = courseURL {
+//            webViewController.courseURL = url
+//        }
+    
+    }
 }
 
 
@@ -59,9 +69,15 @@ extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PhotoViewCell
         
+        
         configureCell(cell: cell, for: indexPath)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let photoCell = photos[indexPath.item]
+        performSegue(withIdentifier: "showSegue", sender: photoCell)
     }
 }
 
