@@ -17,9 +17,9 @@ class LivePhotoViewController: UIViewController {
     @IBOutlet weak var livePhotoView: PHLivePhotoView!
     fileprivate var isPlayingHint = false
     
-    var image: UIImage!
-    var imageURL: URL!
-    var videoURL: URL!
+     var image: UIImage?
+     var imageURL: URL?
+     var videoURL: URL?
     
     var urlArray : [String] = ["https://wallpapers.mediacube.games/files/live_photo/43d126e9-7cfc-4bc3-9eab-e92ff7f0bb98/image/IMG.JPG", "https://wallpapers.mediacube.games/files/live_photo/097d1867-54d3-47d9-9b23-2eb40bc09b8e/movie/MOVE.MOV"]
     
@@ -30,16 +30,26 @@ class LivePhotoViewController: UIViewController {
         livePhotoView.delegate = self
         //        livePhotoView.isHidden = true
         setupRecognizers()
-        startDownload(from: urlArray) { _ in
-            
-            
-        }
+        
         
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        startDownload(from: urlArray) { [weak self] success in
+            if success {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self?.prepareLivePhoto()
+                }
+                
+            } else {
+            }
+        }
+    }
+    
     ///////
-    func startDownload(from array: [String],completionHandler: @escaping (_ error: Error) -> ()) {
+    func startDownload(from array: [String],completionHandler: @escaping (Bool) -> ()) {
         
         for urlString in array {
             
@@ -50,9 +60,14 @@ class LivePhotoViewController: UIViewController {
                     DispatchQueue.main.async {
                         self?.imageURL = fileUrl
                         self?.image = UIImage(contentsOfFile: fileUrl.path)
+                        print("OK")
                     }
                 } else if fileUrl.pathExtension == "MOV" {
                     self?.videoURL = fileUrl
+                    print("OK")
+
+                } else {
+                    completionHandler(false)
                 }
                 
                 return (fileUrl, [.removePreviousFile, .createIntermediateDirectories])
@@ -61,7 +76,7 @@ class LivePhotoViewController: UIViewController {
             
             Alamofire.download(urlString, to: destination)
                 .downloadProgress { (progress) in
-                    print(progress)
+//                    print(progress)
                 }
                 .responseData { (data) in
                     switch data.result {
@@ -69,12 +84,13 @@ class LivePhotoViewController: UIViewController {
                         print("OK!")
                     case .failure(let error):
                         print(error)
-                        completionHandler(error)
+                        completionHandler(false)
                         
                     }
             }
             
         }
+        completionHandler(true)
         
     }
     
@@ -128,6 +144,7 @@ class LivePhotoViewController: UIViewController {
     }
     
     private func makeLivePhotoFromItems(completion: @escaping (PHLivePhoto) -> Void) {
+        guard let imageURL = self.imageURL, let videoURL = self.videoURL, let image = self.image else { return }
         PHLivePhoto.request(withResourceFileURLs: [imageURL, videoURL], placeholderImage: image, targetSize: CGSize.zero, contentMode: .aspectFit) {
             (livePhoto, infoDict) -> Void in
             
