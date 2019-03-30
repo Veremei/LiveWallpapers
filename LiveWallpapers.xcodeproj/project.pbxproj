@@ -57,14 +57,14 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		183DD494224F96C4002AE011 /* Photo */ = {
+		183DD494224F96C4002AE011 /* Photo Collection */ = {
 			isa = PBXGroup;
 			children = (
 				185117C0224F68BF0021CBB1 /* PhotoViewCell.swift */,
 				185117AE224F67670021CBB1 /* ViewController.swift */,
 				185117BE224F67F10021CBB1 /* Photo.swift */,
 			);
-			path = Photo;
+			path = "Photo Collection";
 			sourceTree = "<group>";
 		};
 		183DD495224F96D0002AE011 /* Live Photo */ = {
@@ -75,7 +75,7 @@
 			path = "Live Photo";
 			sourceTree = "<group>";
 		};
-		183DD496224F96E4002AE011 /* App */ = {
+		183DD496224F96E4002AE011 /* Application */ = {
 			isa = PBXGroup;
 			children = (
 				185117B5224F676A0021CBB1 /* LaunchScreen.storyboard */,
@@ -83,7 +83,7 @@
 				185117AC224F67670021CBB1 /* AppDelegate.swift */,
 				185117C2224F6D050021CBB1 /* AlamofireNetworkRequest.swift */,
 			);
-			path = App;
+			path = Application;
 			sourceTree = "<group>";
 		};
 		185117A0224F67670021CBB1 = {
@@ -107,9 +107,9 @@
 		185117AB224F67670021CBB1 /* LiveWallpapers */ = {
 			isa = PBXGroup;
 			children = (
-				183DD496224F96E4002AE011 /* App */,
+				183DD496224F96E4002AE011 /* Application */,
 				183DD495224F96D0002AE011 /* Live Photo */,
-				183DD494224F96C4002AE011 /* Photo */,
+				183DD494224F96C4002AE011 /* Photo Collection */,
 				183DD493224F966B002AE011 /* Supporting Files */,
 			);
 			path = LiveWallpapers;
