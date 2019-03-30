@@ -48,6 +48,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		183DD493224F966B002AE011 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				185117B3224F676A0021CBB1 /* Assets.xcassets */,
+				185117B8224F676A0021CBB1 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		185117A0224F67670021CBB1 = {
 			isa = PBXGroup;
 			children = (
@@ -76,9 +85,8 @@
 				185117BE224F67F10021CBB1 /* Photo.swift */,
 				183DD491224F9441002AE011 /* LivePhotoViewController.swift */,
 				185117B0224F67670021CBB1 /* Main.storyboard */,
-				185117B3224F676A0021CBB1 /* Assets.xcassets */,
 				185117B5224F676A0021CBB1 /* LaunchScreen.storyboard */,
-				185117B8224F676A0021CBB1 /* Info.plist */,
+				183DD493224F966B002AE011 /* Supporting Files */,
 			);
 			path = LiveWallpapers;
 			sourceTree = "<group>";
@@ -374,7 +382,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 286Y7287BJ;
-				INFOPLIST_FILE = LiveWallpapers/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/LiveWallpapers/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -393,7 +401,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 286Y7287BJ;
-				INFOPLIST_FILE = LiveWallpapers/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/LiveWallpapers/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
