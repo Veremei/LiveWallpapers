@@ -24,19 +24,16 @@ class AlamofireNetworkRequest {
             switch response.result {
                 
             case .success(let value):
-//               print(value)
+                //               print(value)
                 if let array = value as? JSON, let data = array["data"] as? [JSON] {
-                
-                var photos = [Photo]()
+                    
+                    var photos = [Photo]()
                     
                     for dictionary in data {
-                            guard let forecast = Photo(json: dictionary) else { continue }
-                            photos.append(forecast)
-                       // photos = Photo.getArray(from: dictionary)!
-
-                        }
-                    
-                    
+                        guard let forecast = Photo(json: dictionary) else { continue }
+                        photos.append(forecast)
+                        // photos = Photo.getArray(from: dictionary)!
+                    }
                     print(photos)
                     completion(photos)
                     
@@ -104,30 +101,30 @@ class AlamofireNetworkRequest {
         }
     }
     
-//    static func downloadImageWithProgress(url: String, completion: @escaping (_ image: UIImage) -> ()) {
-//
-//        guard let url = URL(string: url) else { return }
-//
-//        request(url)
-//            .validate()
-//            .downloadProgress { (progress) in
-//
-//                print("totalUnitCount: \(progress.totalUnitCount)\n")
-//                print("completedUnitCount:\(progress.completedUnitCount)\n")
-//                print("fractionCompleted:\(progress.fractionCompleted)\n")
-//                print("loclizedDescription:\(progress.localizedDescription!)\n")
-//                print("---------------------------------------------------------")
-//
-//                self.onProgress?(progress.fractionCompleted)
-//                self.completed?(progress.localizedDescription)
-//
-//            }.response { (response) in
-//
-//                guard let data = response.data, let image = UIImage(data: data) else { return }
-//
-//                DispatchQueue.main.async {
-//                    completion(image)
-//                }
-//        }
-//    }
+    //    static func downloadImageWithProgress(url: String, completion: @escaping (_ image: UIImage) -> ()) {
+    //
+    //        guard let url = URL(string: url) else { return }
+    //
+    //        request(url)
+    //            .validate()
+    //            .downloadProgress { (progress) in
+    //
+    //                print("totalUnitCount: \(progress.totalUnitCount)\n")
+    //                print("completedUnitCount:\(progress.completedUnitCount)\n")
+    //                print("fractionCompleted:\(progress.fractionCompleted)\n")
+    //                print("loclizedDescription:\(progress.localizedDescription!)\n")
+    //                print("---------------------------------------------------------")
+    //
+    //                self.onProgress?(progress.fractionCompleted)
+    //                self.completed?(progress.localizedDescription)
+    //
+    //            }.response { (response) in
+    //
+    //                guard let data = response.data, let image = UIImage(data: data) else { return }
+    //
+    //                DispatchQueue.main.async {
+    //                    completion(image)
+    //                }
+    //        }
+    //    }
 }

@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     
     private var photos = [Photo]()
     private let url = "https://wallpapers.mediacube.games/api/photos"
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchDataWithAlamofire()
@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     private func configureCell(cell: PhotoViewCell, for indexPath: IndexPath) {
         
         let photo = photos[indexPath.row]
-//        cell.imageView.image = photos.image
+        //        cell.imageView.image = photos.image
         
         
         
@@ -68,16 +68,16 @@ extension ViewController: UICollectionViewDataSource {
 
 extension ViewController: UICollectionViewDelegate {
     
-   
-//
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        let course = courses[indexPath.row]
-//
-//        courseURL = course.link
-//        courseName = course.name
-//
-//        performSegue(withIdentifier: "Description", sender: self)
-//    }
+    
+    //
+    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    //
+    //        let course = courses[indexPath.row]
+    //
+    //        courseURL = course.link
+    //        courseName = course.name
+    //
+    //        performSegue(withIdentifier: "Description", sender: self)
+    //    }
 }
 
