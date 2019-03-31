@@ -64,7 +64,6 @@ extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PhotoViewCell
         
-        
         configureCell(cell: cell, for: indexPath)
         
         return cell
@@ -78,18 +77,5 @@ extension ViewController: UICollectionViewDataSource {
 }
 
 
-extension ViewController: UICollectionViewDelegate {
-    
-    
-    //
-    //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    //
-    //        let course = courses[indexPath.row]
-    //
-    //        courseURL = course.link
-    //        courseName = course.name
-    //
-    //        performSegue(withIdentifier: "Description", sender: self)
-    //    }
-}
+extension ViewController: UICollectionViewDelegate {}
 

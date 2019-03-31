@@ -26,7 +26,6 @@ class LivePhotoViewController: UIViewController {
     
     var urlArray : [String] = ["https://wallpapers.mediacube.games/files/live_photo/43d126e9-7cfc-4bc3-9eab-e92ff7f0bb98/image/IMG.JPG", "https://wallpapers.mediacube.games/files/live_photo/097d1867-54d3-47d9-9b23-2eb40bc09b8e/movie/MOVE.MOV"]
     
-    //    var path = "file:///Users/apple/Library/Developer/CoreSimulator/Devices/891FE93C-F2DA-46A2-B009-7FBD3A536E45/data/Containers/Data/Application/3E7E5F26-26D1-42F5-8DC6-A6C47736D573/Documents/IMG.JPG"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,11 +59,9 @@ class LivePhotoViewController: UIViewController {
                     DispatchQueue.main.async {
                         self?.imageURL = fileUrl
                         self?.image = UIImage(contentsOfFile: fileUrl.path)
-                        print("OK")
                     }
                 } else if fileUrl.pathExtension == "MOV" {
                     self?.videoURL = fileUrl
-                    print("OK")
                 } else {
                     completionHandler(false)
                 }
@@ -80,7 +77,6 @@ class LivePhotoViewController: UIViewController {
                     case .success:
                         print("OK!")
                     case .failure(let error):
-                        print(error)
                         completionHandler(false)
                     }
             }
@@ -111,7 +107,6 @@ class LivePhotoViewController: UIViewController {
         let filePath = "\(dirPath)/\(itemName).\(fileExtension)"
         do {
             try fileManager.removeItem(atPath: filePath)
-            print("deleted")
         } catch let error as NSError {
             print(error.debugDescription)
         }
