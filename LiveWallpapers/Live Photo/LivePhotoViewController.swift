@@ -44,7 +44,7 @@ class LivePhotoViewController: UIViewController {
             if success {
                 self?.prepareLivePhoto()
             } else {
-                
+                self?.showErrorMessage()
             }
         }
     }
@@ -80,13 +80,11 @@ class LivePhotoViewController: UIViewController {
             
             Alamofire.download(urlString, to: destination)
                 .downloadProgress { (progress) in
-                    print(progress)
-                }
-                .responseData { (data) in
+                }.responseData { (data) in
                     switch data.result {
                     case .success:
                         downloads += 1
-                    case .failure(let error):
+                    case .failure:
                         completionHandler(false)
                     }
             }
@@ -151,7 +149,27 @@ class LivePhotoViewController: UIViewController {
         removeItem(itemName: "IMG", fileExtension: "JPG")
         removeItem(itemName: "MOVE", fileExtension: "MOV")
     }
+    
+    
+    func popThisView() {
+        self.dismiss(animated: false, completion: nil)
+        self.navigationController!.popToRootViewController(animated: true)
+    }
+    
+    
+    func showErrorMessage() {
+        let alertController = UIAlertController(title: "Loading error",
+                                                message: "Try again",
+                                                preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler:{ (alertOKAction) in
+            self.popThisView()
+        }))
+        self.present(alertController, animated: true, completion: nil)
+    }
 }
+
+
 
 extension LivePhotoViewController: PHLivePhotoViewDelegate {
     func livePhotoView(_ livePhotoView: PHLivePhotoView, willBeginPlaybackWith playbackStyle: PHLivePhotoViewPlaybackStyle) {
@@ -162,9 +180,4 @@ extension LivePhotoViewController: PHLivePhotoViewDelegate {
         isPlayingHint = (playbackStyle == .hint)
     }
 }
-
-// add alertView
-// Cache image
-// UI
-
 

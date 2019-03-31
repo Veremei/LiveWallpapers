@@ -32,9 +32,9 @@ class ViewController: UIViewController {
     
     
     private func configureCell(cell: PhotoViewCell, for indexPath: IndexPath) {
-        
+        cell.layer.shouldRasterize = true
+        cell.layer.rasterizationScale = UIScreen.main.scale
         let photo = photos[indexPath.item]
-        //        cell.imageView.image = photos.image
         
         DispatchQueue.global().async {
             guard let imageUrl = URL(string: photo.image!) else { return }
