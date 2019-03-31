@@ -1,6 +1,6 @@
 # LiveWallpapers
 
-App for downloading live wallpapers
+App for downloading live wallpapers from server
 
 Not done yet : 
 - infiniteScrolling for pages or simply pagination
