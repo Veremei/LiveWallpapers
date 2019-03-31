@@ -21,7 +21,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wZ1-rl-F0F">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="3" id="byd-2K-9hG">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="3" id="byd-2K-9hG">
                                     <size key="itemSize" width="100" height="180"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -87,31 +87,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mzc-Yc-HQO">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6K8-xc-MXW" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                <rect key="frame" x="70" y="134" width="235" height="463"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="padding">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BlP-sO-rO1" customClass="PHLivePhotoView">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 <gestureRecognizers/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="mzc-Yc-HQO" firstAttribute="top" secondItem="OR4-Sz-kkN" secondAttribute="top" id="00z-Rf-viO"/>
                             <constraint firstItem="BlP-sO-rO1" firstAttribute="top" secondItem="OR4-Sz-kkN" secondAttribute="top" id="B44-VW-UB4"/>
                             <constraint firstItem="BlP-sO-rO1" firstAttribute="leading" secondItem="OR4-Sz-kkN" secondAttribute="leading" id="Dkb-95-Njc"/>
-                            <constraint firstItem="OR4-Sz-kkN" firstAttribute="trailing" secondItem="mzc-Yc-HQO" secondAttribute="trailing" id="Vcf-1F-2Gb"/>
+                            <constraint firstItem="6K8-xc-MXW" firstAttribute="top" secondItem="OR4-Sz-kkN" secondAttribute="top" constant="70" id="K2d-W0-FZx"/>
                             <constraint firstItem="OR4-Sz-kkN" firstAttribute="bottom" secondItem="BlP-sO-rO1" secondAttribute="bottom" id="YnF-uS-Ioo"/>
                             <constraint firstItem="OR4-Sz-kkN" firstAttribute="trailing" secondItem="BlP-sO-rO1" secondAttribute="trailing" id="b7F-pS-wWV"/>
-                            <constraint firstItem="mzc-Yc-HQO" firstAttribute="leading" secondItem="OR4-Sz-kkN" secondAttribute="leading" id="cor-1y-Vzt"/>
-                            <constraint firstItem="OR4-Sz-kkN" firstAttribute="bottom" secondItem="mzc-Yc-HQO" secondAttribute="bottom" id="fg9-lZ-Mpm"/>
+                            <constraint firstItem="OR4-Sz-kkN" firstAttribute="trailing" secondItem="6K8-xc-MXW" secondAttribute="trailing" constant="70" id="c4h-P1-CIw"/>
+                            <constraint firstItem="OR4-Sz-kkN" firstAttribute="bottom" secondItem="6K8-xc-MXW" secondAttribute="bottom" constant="70" id="jl7-0Y-d9n"/>
+                            <constraint firstItem="6K8-xc-MXW" firstAttribute="leading" secondItem="OR4-Sz-kkN" secondAttribute="leading" constant="70" id="rJB-4i-ZO5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OR4-Sz-kkN"/>
                     </view>
                     <navigationItem key="navigationItem" id="0Z5-HN-7Lh"/>
                     <connections>
-                        <outlet property="imageView" destination="mzc-Yc-HQO" id="UAr-kL-OeJ"/>
+                        <outlet property="activityIndicatorView" destination="6K8-xc-MXW" id="WfY-d8-Ljc"/>
                         <outlet property="livePhotoView" destination="BlP-sO-rO1" id="vq9-by-QAd"/>
                     </connections>
                 </viewController>

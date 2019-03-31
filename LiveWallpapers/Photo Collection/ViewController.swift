@@ -12,8 +12,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var photos = [Photo]()
+    private var detailPhoto : Photo?
     private let url = "https://wallpapers.mediacube.games/api/photos"
-//    private let videoUrl: String
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     
     private func configureCell(cell: PhotoViewCell, for indexPath: IndexPath) {
         
-        let photo = photos[indexPath.row]
+        let photo = photos[indexPath.item]
         //        cell.imageView.image = photos.image
         
         DispatchQueue.global().async {
@@ -48,15 +48,10 @@ class ViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let livePhotoVC = segue.destination as! LivePhotoViewController
-//            livePhotoVC.videoURL =
-        
-//        livePhotoVC.selectedCourse = courseName
-        
-//        if let url = courseURL {
-//            webViewController.courseURL = url
-//        }
-    
+        if let livePhotoVC = segue.destination as? LivePhotoViewController {
+            guard let image = detailPhoto?.image,let move = detailPhoto?.movie else { return }
+        livePhotoVC.urlArray = [image,move]
+        }
     }
 }
 
@@ -77,6 +72,7 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let photoCell = photos[indexPath.item]
+        detailPhoto = photoCell
         performSegue(withIdentifier: "showSegue", sender: photoCell)
     }
 }

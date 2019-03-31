@@ -12,46 +12,43 @@ import PhotosUI
 import Alamofire
 import MobileCoreServices
 import AVFoundation
-
+import NVActivityIndicatorView
 
 class LivePhotoViewController: UIViewController {
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
     @IBOutlet weak var livePhotoView: PHLivePhotoView!
     fileprivate var isPlayingHint = false
     
-     var image: UIImage?
-     var imageURL: URL?
-     var videoURL: URL?
+    var image: UIImage?
+    var imageURL: URL?
+    var videoURL: URL?
     
     var urlArray : [String] = ["https://wallpapers.mediacube.games/files/live_photo/43d126e9-7cfc-4bc3-9eab-e92ff7f0bb98/image/IMG.JPG", "https://wallpapers.mediacube.games/files/live_photo/097d1867-54d3-47d9-9b23-2eb40bc09b8e/movie/MOVE.MOV"]
     
-    var path = "file:///Users/apple/Library/Developer/CoreSimulator/Devices/891FE93C-F2DA-46A2-B009-7FBD3A536E45/data/Containers/Data/Application/3E7E5F26-26D1-42F5-8DC6-A6C47736D573/Documents/IMG.JPG"
+    //    var path = "file:///Users/apple/Library/Developer/CoreSimulator/Devices/891FE93C-F2DA-46A2-B009-7FBD3A536E45/data/Containers/Data/Application/3E7E5F26-26D1-42F5-8DC6-A6C47736D573/Documents/IMG.JPG"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         livePhotoView.delegate = self
-        //        livePhotoView.isHidden = true
+        livePhotoView.isHidden = true
         setupRecognizers()
-        
-        
-        
+        activityIndicatorView.type = NVActivityIndicatorType.circleStrokeSpin
+        activityIndicatorView.startAnimating()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         startDownload(from: urlArray) { [weak self] success in
             if success {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    self?.prepareLivePhoto()
-                }
-                
+                self?.prepareLivePhoto()
             } else {
+                
             }
         }
     }
     
-    ///////
+    
     func startDownload(from array: [String],completionHandler: @escaping (Bool) -> ()) {
         
         for urlString in array {
@@ -68,7 +65,6 @@ class LivePhotoViewController: UIViewController {
                 } else if fileUrl.pathExtension == "MOV" {
                     self?.videoURL = fileUrl
                     print("OK")
-
                 } else {
                     completionHandler(false)
                 }
@@ -78,9 +74,7 @@ class LivePhotoViewController: UIViewController {
             }
             
             Alamofire.download(urlString, to: destination)
-                .downloadProgress { (progress) in
-//                    print(progress)
-                }
+                .downloadProgress { (progress) in }
                 .responseData { (data) in
                     switch data.result {
                     case .success:
@@ -88,13 +82,12 @@ class LivePhotoViewController: UIViewController {
                     case .failure(let error):
                         print(error)
                         completionHandler(false)
-                        
                     }
             }
-            
         }
-        completionHandler(true)
-        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            completionHandler(true)
+        }
     }
     
     
@@ -105,7 +98,6 @@ class LivePhotoViewController: UIViewController {
         NSLog(fileURL.absoluteString)
         return fileURL;
     }
-    //////
     
     
     func removeItem(itemName:String, fileExtension: String) {
@@ -123,9 +115,7 @@ class LivePhotoViewController: UIViewController {
         } catch let error as NSError {
             print(error.debugDescription)
         }
-        
     }
-    
     
     func setupRecognizers() {
         let longTapRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(recognizer:)))
@@ -144,12 +134,14 @@ class LivePhotoViewController: UIViewController {
     }
     
     private func makeLivePhotoFromItems() {
-        guard let imageURL = self.imageURL, let videoURL = self.videoURL, let image = self.image else { return }
-
-        LivePhoto.generate(from: imageURL, videoURL: videoURL, progress: { percent in }, completion: { livePhoto, resources in
-            self.livePhotoView.livePhoto = livePhoto
-        })
+        guard let imageURL = self.imageURL, let videoURL = self.videoURL, let _ = self.image else { return }
         
+        LivePhoto.generate(from: imageURL, videoURL: videoURL, progress: { percent in }, completion: { [weak self] livePhoto, resources in
+            self?.livePhotoView.livePhoto = livePhoto
+            self?.activityIndicatorView.startAnimating()
+            self?.livePhotoView.isHidden = false
+            self?.livePhotoView.startPlayback(with: .full)
+        })
     }
     
     
@@ -157,30 +149,6 @@ class LivePhotoViewController: UIViewController {
         removeItem(itemName: "IMG", fileExtension: "JPG")
         removeItem(itemName: "MOVE", fileExtension: "MOV")
     }
-    
-    func addAssetID(_ assetIdentifier: String, toImage imageURL: URL, saveTo destinationURL: URL) -> Bool {
-        guard let imageDestination = CGImageDestinationCreateWithURL(destinationURL as CFURL, kUTTypeJPEG, 1, nil),
-            let imageSource = CGImageSourceCreateWithURL(imageURL as CFURL, nil),
-            var imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, nil) as? [AnyHashable : Any] else { return false }
-        let assetIdentifierKey = "17"
-        let assetIdentifierInfo = [assetIdentifierKey : assetIdentifier]
-        imageProperties[kCGImagePropertyMakerAppleDictionary] = assetIdentifierInfo
-        CGImageDestinationAddImageFromSource(imageDestination, imageSource, 0, imageProperties as CFDictionary)
-        CGImageDestinationFinalize(imageDestination)
-        return true
-    }
-    
-    func metadataForAssetID(_ assetIdentifier: String) -> AVMetadataItem {
-        let item = AVMutableMetadataItem()
-        let keyContentIdentifier =  "com.apple.quicktime.content.identifier"
-        let keySpaceQuickTimeMetadata = "mdta"
-        item.key = keyContentIdentifier as (NSCopying & NSObjectProtocol)?
-        item.keySpace = AVMetadataKeySpace(rawValue: keySpaceQuickTimeMetadata)
-        item.value = assetIdentifier as (NSCopying & NSObjectProtocol)?
-        item.dataType = "com.apple.metadata.datatype.UTF-8"
-        return item
-    }
-    
 }
 
 extension LivePhotoViewController: PHLivePhotoViewDelegate {

@@ -7,4 +7,5 @@ target 'LiveWallpapers' do
 
   # Pods for LiveWallpapers
   pod 'Alamofire', '~> 4.7'
+  pod 'NVActivityIndicatorView'
 end
