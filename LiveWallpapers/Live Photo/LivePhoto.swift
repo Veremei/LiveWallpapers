@@ -43,10 +43,10 @@ class LivePhoto {
     
     // MARK: PRIVATE
     private static let shared = LivePhoto()
-    private static let queue = DispatchQueue(label: "com.limit-point.LivePhotoQueue", attributes: .concurrent)
+    private static let queue = DispatchQueue(label: "self.dev.LivePhotoQueue", attributes: .concurrent)
     lazy private var cacheDirectory: URL? = {
         if let cacheDirectoryURL = try? FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false) {
-            let fullDirectory = cacheDirectoryURL.appendingPathComponent("com.limit-point.LivePhoto", isDirectory: true)
+            let fullDirectory = cacheDirectoryURL.appendingPathComponent("self.dev.LivePhotoQueue", isDirectory: true)
             if !FileManager.default.fileExists(atPath: fullDirectory.absoluteString) {
                 try? FileManager.default.createDirectory(at: fullDirectory, withIntermediateDirectories: true, attributes: nil)
             }

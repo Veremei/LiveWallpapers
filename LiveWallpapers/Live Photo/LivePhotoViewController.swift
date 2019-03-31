@@ -129,12 +129,12 @@ class LivePhotoViewController: UIViewController {
     
     func setupRecognizers() {
         let longTapRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(recognizer:)))
+        longTapRecognizer.minimumPressDuration = 0.2
         livePhotoView.addGestureRecognizer(longTapRecognizer)
     }
     
     @objc func handleLongPress(recognizer: UIGestureRecognizer) {
         if recognizer.state == .began {
-            print("\nClicked! Wait for it...\n")
             self.livePhotoView.startPlayback(with: .full)
         }
     }
@@ -144,24 +144,11 @@ class LivePhotoViewController: UIViewController {
     }
     
     private func makeLivePhotoFromItems() {
-//        private func makeLivePhotoFromItems(completion: @escaping (PHLivePhoto) -> Void) {
         guard let imageURL = self.imageURL, let videoURL = self.videoURL, let image = self.image else { return }
-//        PHLivePhoto.request(withResourceFileURLs: [imageURL, videoURL], placeholderImage: image, targetSize: CGSize.zero, contentMode: .aspectFit) {
-//            (livePhoto, infoDict) -> Void in
-//
-//            if let canceled = infoDict[PHLivePhotoInfoCancelledKey] as? NSNumber,
-//                canceled == 0,
-//                let livePhoto = livePhoto
-//            {
-        LivePhoto.generate(from: imageURL, videoURL: videoURL, progress: { percent in }, completion: { livePhoto, resources in
-            // Display the Live Photo in a PHLivePhotoView
-            self.livePhotoView.livePhoto = livePhoto
-            // Or save the resources to the Photo library
-//            LivePhoto.saveToLibrary(resources)
-//            completion(livePhoto)
 
+        LivePhoto.generate(from: imageURL, videoURL: videoURL, progress: { percent in }, completion: { livePhoto, resources in
+            self.livePhotoView.livePhoto = livePhoto
         })
-//            }
         
     }
     
