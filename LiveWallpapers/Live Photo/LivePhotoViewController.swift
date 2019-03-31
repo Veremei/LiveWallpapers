@@ -20,11 +20,13 @@ class LivePhotoViewController: UIViewController {
     @IBOutlet weak var livePhotoView: PHLivePhotoView!
     fileprivate var isPlayingHint = false
     
+    let semaphore = DispatchSemaphore(value: 1)
+    
     var image: UIImage?
     var imageURL: URL?
     var videoURL: URL?
     
-    var urlArray : [String] = ["https://wallpapers.mediacube.games/files/live_photo/43d126e9-7cfc-4bc3-9eab-e92ff7f0bb98/image/IMG.JPG", "https://wallpapers.mediacube.games/files/live_photo/097d1867-54d3-47d9-9b23-2eb40bc09b8e/movie/MOVE.MOV"]
+    var urlArray : [String] = []
     
     
     override func viewDidLoad() {
@@ -49,6 +51,13 @@ class LivePhotoViewController: UIViewController {
     
     
     func startDownload(from array: [String],completionHandler: @escaping (Bool) -> ()) {
+        var downloads = 0 {
+            didSet {
+                if downloads == 2 {
+                    completionHandler(true)
+                }
+            }
+        }
         
         for urlString in array {
             
@@ -65,24 +74,22 @@ class LivePhotoViewController: UIViewController {
                 } else {
                     completionHandler(false)
                 }
-                
                 return (fileUrl, [.removePreviousFile, .createIntermediateDirectories])
                 
             }
             
             Alamofire.download(urlString, to: destination)
-                .downloadProgress { (progress) in }
+                .downloadProgress { (progress) in
+                    print(progress)
+                }
                 .responseData { (data) in
                     switch data.result {
                     case .success:
-                        print("OK!")
+                        downloads += 1
                     case .failure(let error):
                         completionHandler(false)
                     }
             }
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            completionHandler(true)
         }
     }
     
@@ -155,4 +162,9 @@ extension LivePhotoViewController: PHLivePhotoViewDelegate {
         isPlayingHint = (playbackStyle == .hint)
     }
 }
+
+// add alertView
+// Cache image
+// UI
+
 
