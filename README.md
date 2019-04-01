@@ -5,6 +5,6 @@ App for downloading live wallpapers from server
 Not done yet : 
 - share function
 - pages
-- Right corner freeze when scrolling
+- Little freeze scrolling large screens
 
 Download and open LiveWallpapers.xcworkspace
