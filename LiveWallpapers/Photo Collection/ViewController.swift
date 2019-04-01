@@ -36,13 +36,16 @@ class ViewController: UIViewController {
         cell.layer.rasterizationScale = UIScreen.main.scale
         let photo = photos[indexPath.item]
         
-        DispatchQueue.global().async {
+        DispatchQueue.global(qos: .userInitiated).async {
             guard let imageUrl = URL(string: photo.image!) else { return }
             print(imageUrl)
             guard let imageData = try? Data(contentsOf: imageUrl) else { return }
             
             DispatchQueue.main.async {
-                cell.imageView.image = UIImage(data: imageData)
+                if imageUrl == URL(string: photo.image!),let image = UIImage(data: imageData) {
+                    cell.imageView.image = image
+                    
+                }
             }
         }
     }
@@ -79,10 +82,21 @@ extension ViewController: UICollectionViewDataSource {
 
 extension ViewController: UICollectionViewDelegate {
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: self.collectionView.frame.width / 3, height: self.collectionView.frame.height / 6 * 5)
-//
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.collectionView.frame.width / 3, height: self.collectionView.frame.height / 6 * 5)
+
+    }
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout
+        collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10.0
+    }
 //
 //
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -90,3 +104,4 @@ extension ViewController: UICollectionViewDelegate {
 //    }
 }
 //extension
+
