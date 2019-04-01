@@ -23,16 +23,17 @@ class ViewController: UIViewController {
     
     func fetchDataWithAlamofire() {
         
-        AlamofireNetworkRequest.sendRequest(url: url) { (photos) in
-            self.photos = photos
+        AlamofireNetworkRequest.sendRequest(url: url) { [weak self] (photos) in
+            self?.photos = photos
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                self?.collectionView.reloadData()
             }
         }
     }
     
     
     private func configureCell(cell: PhotoViewCell, for indexPath: IndexPath) {
+        
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
         let photo = photos[indexPath.item]
@@ -40,13 +41,12 @@ class ViewController: UIViewController {
         DispatchQueue.global(qos: .userInitiated).async {
             guard let imageUrl = URL(string: photo.image!) else { return }
             print(imageUrl)
-            guard let imageData = try? Data(contentsOf: imageUrl) else { return }
+//            guard let imageData = try? Data(contentsOf: imageUrl) else { return }
             
             DispatchQueue.main.async {
-                if imageUrl == URL(string: photo.image!),let image = UIImage(data: imageData) {
-                    cell.imageView.image = image
-                    
-                }
+//                if imageUrl == URL(string: photo.image!),let image = UIImage(data: imageData) {
+//                    cell.imageView.image = image
+                Nuke.loadImage(with: imageUrl, into: cell.imageView)
             }
         }
     }
