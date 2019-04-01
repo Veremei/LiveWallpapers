@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     private let url = "https://wallpapers.mediacube.games/api/photos"
     
     var cellWidth: CGFloat = UIScreen.main.bounds.width / 3 - 4
-    var cellHeight: CGFloat = UIScreen.main.bounds.height / 4
+    var cellHeight: CGFloat = UIScreen.main.bounds.height / 3.5
     
     override func viewDidLoad() {
         super.viewDidLoad()
