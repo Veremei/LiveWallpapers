@@ -21,8 +21,12 @@ class LivePhotoViewController: UIViewController {
     @IBOutlet weak var livePhotoView: PHLivePhotoView!
     
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
-        guard let imageURL = self.imageURL, let videoURL = self.videoURL, let _ = self.image else { return }
-        LivePhoto.generate(from: imageURL, videoURL: videoURL, progress: { percent in }, completion: { [weak self] _, resources in
+        PHPhotoLibrary.requestAuthorization { status in
+            guard status == .authorized else { return }}
+            guard let imageURL = self.imageURL, let videoURL = self.videoURL, let _ = self.image else { return }
+            
+        
+        LivePhoto.generate(from: imageURL, videoURL: videoURL, progress: { percent in }, completion: { _, resources in
             guard let resources = resources else { return }
             // Display the Live Photo in a PHLivePhotoView
             // Or save the resources to the Photo library
@@ -37,8 +41,8 @@ class LivePhotoViewController: UIViewController {
 //                    postAlert("Live Photo Not Saved", message:"The live photo was not saved to Photos.")
                 }
             })
-    }
-    )}
+            }
+            )}
     
     fileprivate var isPlayingHint = false
     var image: UIImage?
