@@ -16,6 +16,9 @@ class ViewController: UIViewController {
     private var detailPhoto : Photo?
     private let url = "https://wallpapers.mediacube.games/api/photos"
     
+    var cellWidth: CGFloat = UIScreen.main.bounds.width / 3 - 4
+    var cellHeight: CGFloat = UIScreen.main.bounds.height / 4
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchDataWithAlamofire()
@@ -46,10 +49,18 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {
 //                if imageUrl == URL(string: photo.image!),let image = UIImage(data: imageData) {
 //                    cell.imageView.image = image
-                Nuke.loadImage(with: imageUrl, into: cell.imageView)
+                let options = ImageLoadingOptions(
+                    transition: .fadeIn(duration: 0.5)
+                )
+                let request = ImageRequest(
+                    url: imageUrl,
+                    targetSize: CGSize(width: self.cellWidth, height: self.cellHeight),
+                    contentMode: .aspectFill)
+                Nuke.loadImage(with: request,options: options, into: cell.imageView)
             }
         }
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let livePhotoVC = segue.destination as? LivePhotoViewController {
@@ -57,7 +68,13 @@ class ViewController: UIViewController {
         livePhotoVC.urlArray = [image,move]
         }
     }
+    
+    
 }
+
+
+
+
 
 
 extension ViewController: UICollectionViewDataSource {
@@ -78,13 +95,18 @@ extension ViewController: UICollectionViewDataSource {
         detailPhoto = photoCell
         performSegue(withIdentifier: "showSegue", sender: photoCell)
     }
+    
+    
 }
+
+
 
 
 extension ViewController: UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width / 3 - 4, height: view.frame.height / 4 )
+    
+        return CGSize(width: cellWidth, height: cellHeight )
 
     }
     func collectionView(_ collectionView: UICollectionView,
