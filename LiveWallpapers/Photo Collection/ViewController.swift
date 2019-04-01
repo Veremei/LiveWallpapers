@@ -43,14 +43,14 @@ class ViewController: UIViewController {
         
         DispatchQueue.global(qos: .userInitiated).async {
             guard let imageUrl = URL(string: photo.image!) else { return }
-            print(imageUrl)
+//            print(imageUrl)
 //            guard let imageData = try? Data(contentsOf: imageUrl) else { return }
             
             DispatchQueue.main.async {
 //                if imageUrl == URL(string: photo.image!),let image = UIImage(data: imageData) {
 //                    cell.imageView.image = image
                 let options = ImageLoadingOptions(
-                    transition: .fadeIn(duration: 0.5)
+                    transition: .fadeIn(duration: 0.7)
                 )
                 let request = ImageRequest(
                     url: imageUrl,
