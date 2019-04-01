@@ -50,6 +50,85 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1801C8E62252233400A299F0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				185117AE224F67670021CBB1 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1801C8E72252233A00A299F0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				185117C0224F68BF0021CBB1 /* PhotoViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1801C8E82252233F00A299F0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				185117BE224F67F10021CBB1 /* Photo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1801C8E92252234E00A299F0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1801C8EA2252236A00A299F0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				185117B5224F676A0021CBB1 /* LaunchScreen.storyboard */,
+				185117B0224F67670021CBB1 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1801C8EB2252236E00A299F0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				185117AC224F67670021CBB1 /* AppDelegate.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		1801C8EC2252238000A299F0 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				185117C2224F6D050021CBB1 /* AlamofireNetworkRequest.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		1801C8ED225223D200A299F0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				183DD49722503247002AE011 /* LivePhoto.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1801C8EE225223D700A299F0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1801C8EF225223DB00A299F0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				183DD491224F9441002AE011 /* LivePhotoViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		183DD493224F966B002AE011 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -62,9 +141,9 @@
 		183DD494224F96C4002AE011 /* Photo Collection */ = {
 			isa = PBXGroup;
 			children = (
-				185117C0224F68BF0021CBB1 /* PhotoViewCell.swift */,
-				185117AE224F67670021CBB1 /* ViewController.swift */,
-				185117BE224F67F10021CBB1 /* Photo.swift */,
+				1801C8E82252233F00A299F0 /* Model */,
+				1801C8E72252233A00A299F0 /* View */,
+				1801C8E62252233400A299F0 /* Controller */,
 			);
 			path = "Photo Collection";
 			sourceTree = "<group>";
@@ -72,8 +151,9 @@
 		183DD495224F96D0002AE011 /* Live Photo */ = {
 			isa = PBXGroup;
 			children = (
-				183DD491224F9441002AE011 /* LivePhotoViewController.swift */,
-				183DD49722503247002AE011 /* LivePhoto.swift */,
+				1801C8ED225223D200A299F0 /* Model */,
+				1801C8EE225223D700A299F0 /* View */,
+				1801C8EF225223DB00A299F0 /* Controller */,
 			);
 			path = "Live Photo";
 			sourceTree = "<group>";
@@ -81,10 +161,10 @@
 		183DD496224F96E4002AE011 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				185117B5224F676A0021CBB1 /* LaunchScreen.storyboard */,
-				185117B0224F67670021CBB1 /* Main.storyboard */,
-				185117AC224F67670021CBB1 /* AppDelegate.swift */,
-				185117C2224F6D050021CBB1 /* AlamofireNetworkRequest.swift */,
+				1801C8EC2252238000A299F0 /* Network */,
+				1801C8E92252234E00A299F0 /* Model */,
+				1801C8EA2252236A00A299F0 /* View */,
+				1801C8EB2252236E00A299F0 /* Controller */,
 			);
 			path = Application;
 			sourceTree = "<group>";

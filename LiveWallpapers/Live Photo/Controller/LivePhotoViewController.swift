@@ -20,8 +20,6 @@ class LivePhotoViewController: UIViewController {
     @IBOutlet weak var livePhotoView: PHLivePhotoView!
     fileprivate var isPlayingHint = false
     
-    let semaphore = DispatchSemaphore(value: 1)
-    
     var image: UIImage?
     var imageURL: URL?
     var videoURL: URL?
@@ -42,11 +40,16 @@ class LivePhotoViewController: UIViewController {
         super.viewWillAppear(animated)
         startDownload(from: urlArray) { [weak self] success in
             if success {
-                self?.prepareLivePhoto()
+                self?.makeLivePhotoFromItems()
             } else {
                 self?.showErrorMessage()
             }
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        removeItem(itemName: "IMG", fileExtension: "JPG")
+        removeItem(itemName: "MOVE", fileExtension: "MOV")
     }
     
     
@@ -129,9 +132,6 @@ class LivePhotoViewController: UIViewController {
         }
     }
     
-    func prepareLivePhoto() {
-        makeLivePhotoFromItems()
-    }
     
     private func makeLivePhotoFromItems() {
         guard let imageURL = self.imageURL, let videoURL = self.videoURL, let _ = self.image else { return }
@@ -144,11 +144,6 @@ class LivePhotoViewController: UIViewController {
         })
     }
     
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        removeItem(itemName: "IMG", fileExtension: "JPG")
-        removeItem(itemName: "MOVE", fileExtension: "MOV")
-    }
     
     
     func popThisView() {
@@ -168,6 +163,7 @@ class LivePhotoViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 }
+
 
 
 
