@@ -40,7 +40,7 @@
                                                 </imageView>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="dPf-Pw-v4V" firstAttribute="leading" secondItem="JhU-9a-Ygl" secondAttribute="leading" id="1Is-9s-neL"/>
                                             <constraint firstItem="dPf-Pw-v4V" firstAttribute="top" secondItem="JhU-9a-Ygl" secondAttribute="top" id="efS-Z0-U7r"/>
@@ -57,6 +57,19 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="dmb-y1-qzV"/>
                                 </connections>
                             </collectionView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GOy-eD-jpM">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem image="icons8-chevron-left-filled-90" id="A7b-oC-Obd">
+                                        <color key="tintColor" red="0.31764705882352939" green="0.77254901960784317" blue="0.6705882352941176" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="XvK-i0-5RY"/>
+                                    <barButtonItem image="icons8-chevron-right-filled-90" id="ScJ-Og-inB">
+                                        <color key="tintColor" red="0.31776765294838111" green="0.77215788917089667" blue="0.67181079483849182" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
@@ -102,11 +115,13 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WjK-uh-d9S">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem systemItem="save" id="nDW-je-lad">
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="f9W-6j-RO0"/>
+                                    <barButtonItem image="download" id="nDW-je-lad">
                                         <connections>
                                             <action selector="saveButton:" destination="Z6l-Z6-QMZ" id="SLc-ho-DjO"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="5Z2-TS-ErQ"/>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -155,4 +170,9 @@
             <point key="canvasLocation" x="96.799999999999997" y="132.68365817091455"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="download" width="30" height="30"/>
+        <image name="icons8-chevron-left-filled-90" width="154.28572082519531" height="154.28572082519531"/>
+        <image name="icons8-chevron-right-filled-90" width="154.28572082519531" height="154.28572082519531"/>
+    </resources>
 </document>

@@ -4,23 +4,27 @@ PODS:
   - NVActivityIndicatorView (4.6.1):
     - NVActivityIndicatorView/Presenter (= 4.6.1)
   - NVActivityIndicatorView/Presenter (4.6.1)
+  - SPPermission (2.9.4)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - Nuke (~> 7.0)
   - NVActivityIndicatorView
+  - SPPermission
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - Nuke
     - NVActivityIndicatorView
+    - SPPermission
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
   Nuke: 0350d346a688426e8f2331253ef28dc2fc4f6178
   NVActivityIndicatorView: 4ca19fccc84595a78957336a086d00a49be6ce61
+  SPPermission: 7c03fcc091f0f0bae7538b3fd87afcbd2634ca18
 
-PODFILE CHECKSUM: d15f2f2d663db6ef3f7432244b83c915ca64bdb9
+PODFILE CHECKSUM: baf219c84dad7d13eaa760942ce8a37311deba8f
 
 COCOAPODS: 1.5.3

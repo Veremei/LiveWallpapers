@@ -8,6 +8,7 @@
 
 import UIKit
 import Nuke
+import SPPermission
 
 class ViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
@@ -24,8 +25,15 @@ class ViewController: UIViewController {
         fetchDataWithAlamofire()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let isAllowedLibrary = SPPermission.isAllow(.photoLibrary)
+        if isAllowedLibrary == false {
+            SPPermission.Dialog.request(with: [.photoLibrary], on: self)
+        }
+    }
+    
     func fetchDataWithAlamofire() {
-        
         AlamofireNetworkRequest.sendRequest(url: url) { [weak self] (photos) in
             self?.photos = photos
             DispatchQueue.main.async {
@@ -34,21 +42,12 @@ class ViewController: UIViewController {
         }
     }
     
-    
     private func configureCell(cell: PhotoViewCell, for indexPath: IndexPath) {
-        
-        cell.layer.shouldRasterize = true
-        cell.layer.rasterizationScale = UIScreen.main.scale
         let photo = photos[indexPath.item]
-        
         DispatchQueue.global(qos: .userInitiated).async {
             guard let imageUrl = URL(string: photo.image!) else { return }
-//            print(imageUrl)
-//            guard let imageData = try? Data(contentsOf: imageUrl) else { return }
-            
             DispatchQueue.main.async {
-//                if imageUrl == URL(string: photo.image!),let image = UIImage(data: imageData) {
-//                    cell.imageView.image = image
+
                 let options = ImageLoadingOptions(
                     transition: .fadeIn(duration: 0.7)
                 )
@@ -68,12 +67,7 @@ class ViewController: UIViewController {
         livePhotoVC.urlArray = [image,move]
         }
     }
-    
-    
 }
-
-
-
 
 
 
@@ -84,9 +78,7 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PhotoViewCell
-        
         configureCell(cell: cell, for: indexPath)
-        
         return cell
     }
     
@@ -112,18 +104,19 @@ extension ViewController: UICollectionViewDelegate,UICollectionViewDelegateFlowL
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 4.0
+        return 2.0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout
         collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10.0
+        return 5.0
     }
 
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 10, left: 1, bottom: 0, right: 1)
     }
+    
 }
 

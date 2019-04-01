@@ -9,5 +9,6 @@ target 'LiveWallpapers' do
   pod 'Alamofire', '~> 4.7'
   pod 'NVActivityIndicatorView'
   pod 'Nuke', '~> 7.0'
+  pod 'SPPermission'
 
 end

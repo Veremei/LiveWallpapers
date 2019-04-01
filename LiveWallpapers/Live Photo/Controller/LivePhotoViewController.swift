@@ -13,6 +13,7 @@ import Alamofire
 import MobileCoreServices
 import AVFoundation
 import NVActivityIndicatorView
+import SPPermission
 
 
 class LivePhotoViewController: UIViewController {
@@ -21,28 +22,16 @@ class LivePhotoViewController: UIViewController {
     @IBOutlet weak var livePhotoView: PHLivePhotoView!
     
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
-        PHPhotoLibrary.requestAuthorization { status in
-            guard status == .authorized else { return }
-            guard let imageURL = self.imageURL, let videoURL = self.videoURL, let _ = self.image else { return }
-            
-        
-        LivePhoto.generate(from: imageURL, videoURL: videoURL, progress: { percent in }, completion: { _, resources in
-            guard let resources = resources else { return }
-            // Display the Live Photo in a PHLivePhotoView
-            // Or save the resources to the Photo library
-            LivePhoto.saveToLibrary(resources, completion: { (success) in
-                if success {
-                    print("Saved")
-//                    postAlert("Live Photo Saved", message:"The live photo was successfully saved to Photos.")
-                }
-                else {
-                    print("Not saved")
-
-//                    postAlert("Live Photo Not Saved", message:"The live photo was not saved to Photos.")
-                }
-            })
+        let isAllowedLibrary = SPPermission.isAllow(.photoLibrary)
+        if isAllowedLibrary == true {
+            savePhotoToLibrary()
+        } else {
+            SPPermission.Dialog.request(with: [.photoLibrary], on: self)
+            if isAllowedLibrary == true {
+                savePhotoToLibrary()
             }
-            )}}
+        }
+    }
     
     fileprivate var isPlayingHint = false
     var image: UIImage?
@@ -185,6 +174,28 @@ class LivePhotoViewController: UIViewController {
             self.popThisView()
         }))
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    func savePhotoToLibrary() {
+        guard let imageURL = self.imageURL, let videoURL = self.videoURL, let _ = self.image else { return }
+        
+        
+        LivePhoto.generate(from: imageURL, videoURL: videoURL, progress: { percent in }, completion: { _, resources in
+            guard let resources = resources else { return }
+            
+            LivePhoto.saveToLibrary(resources, completion: { (success) in
+                if success {
+                    print("Saved")
+                    //                    postAlert("Live Photo Saved", message:"The live photo was successfully saved to Photos.")
+                }
+                else {
+                    print("Not saved")
+                    
+                    //                    postAlert("Live Photo Not Saved", message:"The live photo was not saved to Photos.")
+                }
+            })
+        })
     }
 }
 
