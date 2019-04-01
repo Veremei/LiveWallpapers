@@ -22,7 +22,7 @@ class LivePhotoViewController: UIViewController {
     
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
         PHPhotoLibrary.requestAuthorization { status in
-            guard status == .authorized else { return }}
+            guard status == .authorized else { return }
             guard let imageURL = self.imageURL, let videoURL = self.videoURL, let _ = self.image else { return }
             
         
@@ -42,7 +42,7 @@ class LivePhotoViewController: UIViewController {
                 }
             })
             }
-            )}
+            )}}
     
     fileprivate var isPlayingHint = false
     var image: UIImage?
