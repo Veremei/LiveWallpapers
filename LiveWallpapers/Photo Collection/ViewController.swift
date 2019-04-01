@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Nuke
 
 class ViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
@@ -80,16 +81,16 @@ extension ViewController: UICollectionViewDataSource {
 }
 
 
-extension ViewController: UICollectionViewDelegate {
+extension ViewController: UICollectionViewDelegate,UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.collectionView.frame.width / 3, height: self.collectionView.frame.height / 6 * 5)
+        return CGSize(width: view.frame.width / 3 - 4, height: view.frame.height / 4 )
 
     }
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 10.0
+        return 4.0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout
@@ -97,11 +98,10 @@ extension ViewController: UICollectionViewDelegate {
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10.0
     }
-//
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//    }
+
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0)
+    }
 }
-//extension
 
