@@ -14,16 +14,16 @@ import MobileCoreServices
 import AVFoundation
 import NVActivityIndicatorView
 
+
 class LivePhotoViewController: UIViewController {
     
     @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
     @IBOutlet weak var livePhotoView: PHLivePhotoView!
-    fileprivate var isPlayingHint = false
     
+    fileprivate var isPlayingHint = false
     var image: UIImage?
     var imageURL: URL?
     var videoURL: URL?
-    
     var urlArray : [String] = []
     
     
