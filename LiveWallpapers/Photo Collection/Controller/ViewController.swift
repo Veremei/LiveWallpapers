@@ -11,18 +11,20 @@ import Nuke
 import SPPermission
 
 class ViewController: UIViewController {
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBAction func previousPageButton(_ sender: UIBarButtonItem) {
-                    guard let linkPrev = links?.prev else {return}
+        guard let linkPrev = links?.prev else { return }
         url = linkPrev
     }
     
     @IBAction func nextPageButton(_ sender: UIBarButtonItem) {
-                    guard let linkNext = links?.next else {return}
+        guard let linkNext = links?.next else { return }
         url = linkNext
-
     }
     
+    @IBOutlet weak var nextBarButton: UIBarButtonItem!
+    @IBOutlet weak var prevBarButton: UIBarButtonItem!
     
     
     private var photos = [Photo]()
@@ -32,14 +34,10 @@ class ViewController: UIViewController {
     
     private var url = "https://wallpapers.mediacube.games/api/photos?page=1" {
         didSet {
-//            guard let linkNext = links?.next else {return}
-//            guard let linkPrev = links?.prev else {return}
             fetchDataWithAlamofire()
-
-
         }
     }
-
+    
     var cellWidth: CGFloat = UIScreen.main.bounds.width / 3 - 4
     var cellHeight: CGFloat = UIScreen.main.bounds.height / 3.5
     
@@ -60,9 +58,31 @@ class ViewController: UIViewController {
     
     func fetchDataWithAlamofire() {
         AlamofireNetworkRequest.sendRequest(url: url) { [weak self] (photos,meta,links)  in
+            
             self?.photos = photos
             self?.meta = meta
             self?.links = links
+            
+            print(links)
+
+            //need to optimize ->
+            if links.next == nil {
+                self?.nextBarButton.isEnabled = false
+                self?.nextBarButton.tintColor = #colorLiteral(red: 0.1215686277, green: 0.1294117719, blue: 0.1411764771, alpha: 1)
+            } else {
+                self?.nextBarButton.isEnabled = true
+                self?.nextBarButton.tintColor = #colorLiteral(red: 0.2549019608, green: 0.6235294118, blue: 0.5490196078, alpha: 1)
+            }
+            if links.prev == nil {
+                self?.prevBarButton.isEnabled = false
+                self?.prevBarButton.tintColor = #colorLiteral(red: 0.1215686277, green: 0.1294117719, blue: 0.1411764771, alpha: 1)
+            } else {
+                self?.prevBarButton.isEnabled = true
+                self?.prevBarButton.tintColor = #colorLiteral(red: 0.2549019608, green: 0.6235294118, blue: 0.5490196078, alpha: 1)
+            }
+            // <-
+            
+            
 //            self?.downloadGroup.notify(queue: DispatchQueue.main) {
 print(links)
             DispatchQueue.main.async {
@@ -71,6 +91,7 @@ print(links)
             }
         }
     }
+    
     
     private func configureCell(cell: PhotoViewCell, for indexPath: IndexPath) {
         let photo = photos[indexPath.item]

@@ -62,14 +62,14 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
                                     <barButtonItem image="icons8-chevron-left-filled-90" id="A7b-oC-Obd">
-                                        <color key="tintColor" red="0.31764705882352939" green="0.77254901960784317" blue="0.6705882352941176" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" red="0.25425239581415632" green="0.62363563128297006" blue="0.54713671495993288" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="previousPageButton:" destination="BYZ-38-t0r" id="n2f-sd-3k1"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="XvK-i0-5RY"/>
                                     <barButtonItem image="icons8-chevron-right-filled-90" id="ScJ-Og-inB">
-                                        <color key="tintColor" red="0.31776765294838111" green="0.77215788917089667" blue="0.67181079483849182" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" red="0.25490196078431371" green="0.62352941176470589" blue="0.5490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="nextPageButton:" destination="BYZ-38-t0r" id="gPU-bo-zuS"/>
                                         </connections>
@@ -89,6 +89,8 @@
                     <navigationItem key="navigationItem" id="J7x-z9-ArC"/>
                     <connections>
                         <outlet property="collectionView" destination="wZ1-rl-F0F" id="sUC-K2-fdm"/>
+                        <outlet property="nextBarButton" destination="ScJ-Og-inB" id="NzI-S3-AK0"/>
+                        <outlet property="prevBarButton" destination="A7b-oC-Obd" id="wDC-CV-bHi"/>
                         <segue destination="Z6l-Z6-QMZ" kind="show" identifier="showSegue" id="vgr-4X-xdq"/>
                     </connections>
                 </viewController>
