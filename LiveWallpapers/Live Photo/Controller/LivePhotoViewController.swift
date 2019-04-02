@@ -14,7 +14,7 @@ import MobileCoreServices
 import AVFoundation
 import NVActivityIndicatorView
 import SPPermission
-
+import Loaf
 
 class LivePhotoViewController: UIViewController {
     
@@ -179,20 +179,20 @@ class LivePhotoViewController: UIViewController {
     
     func savePhotoToLibrary() {
         guard let imageURL = self.imageURL, let videoURL = self.videoURL, let _ = self.image else { return }
-        
-        
         LivePhoto.generate(from: imageURL, videoURL: videoURL, progress: { percent in }, completion: { _, resources in
             guard let resources = resources else { return }
             
             LivePhoto.saveToLibrary(resources, completion: { (success) in
                 if success {
                     print("Saved")
-                    //                    postAlert("Live Photo Saved", message:"The live photo was successfully saved to Photos.")
-                }
-                else {
+                    DispatchQueue.main.async {
+                        Loaf("Wallpaper Saved", state: .success,presentingDirection: .left, dismissingDirection: .vertical, sender: self).show()
+                    }
+                } else {
                     print("Not saved")
-                    
-                    //                    postAlert("Live Photo Not Saved", message:"The live photo was not saved to Photos.")
+                    DispatchQueue.main.async {
+                        Loaf("An error has occured", state: .error , sender: self).show()
+                    }
                 }
             })
         })

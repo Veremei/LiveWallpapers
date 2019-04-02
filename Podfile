@@ -10,5 +10,6 @@ target 'LiveWallpapers' do
   pod 'NVActivityIndicatorView'
   pod 'Nuke', '~> 7.0'
   pod 'SPPermission'
+  pod 'Loaf'
 
 end

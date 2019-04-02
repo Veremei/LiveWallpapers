@@ -38,8 +38,8 @@ class ViewController: UIViewController {
         }
     }
     
-    var cellWidth: CGFloat = UIScreen.main.bounds.width / 3 - 4
-    var cellHeight: CGFloat = UIScreen.main.bounds.height / 3.5
+    var cellWidth: CGFloat = UIScreen.main.bounds.width / 3 - 8
+    var cellHeight: CGFloat = UIScreen.main.bounds.height / 3.2
     
     
     
@@ -63,8 +63,6 @@ class ViewController: UIViewController {
             self?.meta = meta
             self?.links = links
             
-            print(links)
-
             //need to optimize ->
             if links.next == nil {
                 self?.nextBarButton.isEnabled = false
@@ -82,12 +80,11 @@ class ViewController: UIViewController {
             }
             // <-
             
-            
 //            self?.downloadGroup.notify(queue: DispatchQueue.main) {
-print(links)
+            //            }
+
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
-//            }
             }
         }
     }
@@ -103,9 +100,10 @@ print(links)
                 )
                 let request = ImageRequest(
                     url: imageUrl,
-                    targetSize: CGSize(width: self.cellWidth, height: self.cellHeight),
+                    targetSize: CGSize(width: self.cellWidth+10, height: self.cellHeight),
                     contentMode: .aspectFill)
                 Nuke.loadImage(with: request,options: options, into: cell.imageView)
+                
             }
         }
     }
@@ -138,8 +136,6 @@ extension ViewController: UICollectionViewDataSource {
         detailPhoto = photoCell
         performSegue(withIdentifier: "showSegue", sender: photoCell)
     }
-    
-    
 }
 
 
@@ -155,18 +151,18 @@ extension ViewController: UICollectionViewDelegate,UICollectionViewDelegateFlowL
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 1
+        return 4
     }
     
     func collectionView(_ collectionView: UICollectionView, layout
         collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
+        return 10
     }
 
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 2, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 10, left: 2, bottom: 10, right: 2)
     }
     
 }

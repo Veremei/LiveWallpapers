@@ -20,8 +20,10 @@ class PhotoViewCell: UICollectionViewCell {
   
     override func layoutSubviews() {
         super.layoutSubviews()
+        imageView.contentMode = UIView.ContentMode.scaleAspectFill
+        imageView.clipsToBounds = true
         self.layer.cornerRadius = 18
-        self.layer.borderWidth = 0.2
+        self.layer.borderWidth = 0.1
         self.layer.masksToBounds = true
     }
 }
