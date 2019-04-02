@@ -20,6 +20,7 @@ class LivePhotoViewController: UIViewController {
     
     @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
     @IBOutlet weak var livePhotoView: PHLivePhotoView!
+    @IBOutlet weak var saveBarButton: UIBarButtonItem!
     
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
         let isAllowedLibrary = SPPermission.isAllow(.photoLibrary)
@@ -44,6 +45,7 @@ class LivePhotoViewController: UIViewController {
         super.viewDidLoad()
         livePhotoView.delegate = self
         livePhotoView.isHidden = true
+        saveBarButton.isEnabled = false
         setupRecognizers()
         activityIndicatorView.type = NVActivityIndicatorType.circleStrokeSpin
         activityIndicatorView.startAnimating()
@@ -153,6 +155,7 @@ class LivePhotoViewController: UIViewController {
             self?.livePhotoView.livePhoto = livePhoto
             self?.activityIndicatorView.stopAnimating()
             self?.livePhotoView.isHidden = false
+            self?.saveBarButton.isEnabled = true
             self?.livePhotoView.startPlayback(with: .full)
         })
     }

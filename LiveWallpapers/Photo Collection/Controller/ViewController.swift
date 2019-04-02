@@ -39,7 +39,7 @@ class ViewController: UIViewController {
     }
     
     var cellWidth: CGFloat = UIScreen.main.bounds.width / 3 - 8
-    var cellHeight: CGFloat = UIScreen.main.bounds.height / 3.2
+    var cellHeight: CGFloat = UIScreen.main.bounds.height / 3.4
     
     
     
