@@ -12,22 +12,16 @@ class PhotoViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     
-    
     override var bounds: CGRect {
         didSet {
             self.layoutIfNeeded()
         }
     }
-    
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//
-//    }
-    
+  
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.layer.cornerRadius = 20.0
-        self.layer.borderWidth = 1.0
+        self.layer.cornerRadius = 18
+        self.layer.borderWidth = 0.2
         self.layer.masksToBounds = true
     }
 }

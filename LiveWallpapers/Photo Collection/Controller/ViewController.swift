@@ -12,13 +12,27 @@ import SPPermission
 
 class ViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBAction func previousPageButton(_ sender: UIBarButtonItem) {
+        
+    }
+    
+    @IBAction func nextPageButton(_ sender: UIBarButtonItem) {
+//        meta?.current_page =
+    }
+    
+    
     
     private var photos = [Photo]()
+    private var meta : Meta?
+    private var links : Links?
     private var detailPhoto : Photo?
-    private let url = "https://wallpapers.mediacube.games/api/photos"
     
+    private let url = "https://wallpapers.mediacube.games/api/photos"
+
     var cellWidth: CGFloat = UIScreen.main.bounds.width / 3 - 4
     var cellHeight: CGFloat = UIScreen.main.bounds.height / 3.5
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +48,15 @@ class ViewController: UIViewController {
     }
     
     func fetchDataWithAlamofire() {
-        AlamofireNetworkRequest.sendRequest(url: url) { [weak self] (photos) in
+        AlamofireNetworkRequest.sendRequest(url: url) { [weak self] (photos,meta,links)  in
             self?.photos = photos
+            self?.meta = meta
+            self?.links = links
+//            self?.downloadGroup.notify(queue: DispatchQueue.main) {
+
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
+//            }
             }
         }
     }
@@ -47,7 +66,6 @@ class ViewController: UIViewController {
         DispatchQueue.global(qos: .userInitiated).async {
             guard let imageUrl = URL(string: photo.image!) else { return }
             DispatchQueue.main.async {
-
                 let options = ImageLoadingOptions(
                     transition: .fadeIn(duration: 0.7)
                 )
@@ -79,6 +97,7 @@ extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PhotoViewCell
         configureCell(cell: cell, for: indexPath)
+        
         return cell
     }
     
@@ -104,18 +123,18 @@ extension ViewController: UICollectionViewDelegate,UICollectionViewDelegateFlowL
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 2.0
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, layout
         collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 5.0
+        return 8
     }
 
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 1, bottom: 0, right: 1)
+        return UIEdgeInsets(top: 10, left: 2, bottom: 0, right: 0)
     }
     
 }

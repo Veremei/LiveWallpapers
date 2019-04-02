@@ -63,10 +63,16 @@
                                 <items>
                                     <barButtonItem image="icons8-chevron-left-filled-90" id="A7b-oC-Obd">
                                         <color key="tintColor" red="0.31764705882352939" green="0.77254901960784317" blue="0.6705882352941176" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="previousPageButton:" destination="BYZ-38-t0r" id="n2f-sd-3k1"/>
+                                        </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="XvK-i0-5RY"/>
                                     <barButtonItem image="icons8-chevron-right-filled-90" id="ScJ-Og-inB">
                                         <color key="tintColor" red="0.31776765294838111" green="0.77215788917089667" blue="0.67181079483849182" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <action selector="nextPageButton:" destination="BYZ-38-t0r" id="gPU-bo-zuS"/>
+                                        </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
@@ -99,7 +105,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6K8-xc-MXW" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                <rect key="frame" x="70" y="134" width="235" height="463"/>
+                                <rect key="frame" x="100" y="224" width="175" height="239"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="padding">
@@ -130,13 +136,13 @@
                             <constraint firstItem="BlP-sO-rO1" firstAttribute="top" secondItem="OR4-Sz-kkN" secondAttribute="top" id="B44-VW-UB4"/>
                             <constraint firstItem="BlP-sO-rO1" firstAttribute="leading" secondItem="OR4-Sz-kkN" secondAttribute="leading" id="Dkb-95-Njc"/>
                             <constraint firstItem="WjK-uh-d9S" firstAttribute="trailing" secondItem="OR4-Sz-kkN" secondAttribute="trailing" id="J8t-PC-XEL"/>
-                            <constraint firstItem="6K8-xc-MXW" firstAttribute="top" secondItem="OR4-Sz-kkN" secondAttribute="top" constant="70" id="K2d-W0-FZx"/>
+                            <constraint firstItem="6K8-xc-MXW" firstAttribute="top" secondItem="OR4-Sz-kkN" secondAttribute="top" constant="160" id="K2d-W0-FZx"/>
                             <constraint firstItem="OR4-Sz-kkN" firstAttribute="bottom" secondItem="WjK-uh-d9S" secondAttribute="bottom" id="UGB-Mt-x5y"/>
                             <constraint firstItem="OR4-Sz-kkN" firstAttribute="bottom" secondItem="BlP-sO-rO1" secondAttribute="bottom" id="YnF-uS-Ioo"/>
                             <constraint firstItem="OR4-Sz-kkN" firstAttribute="trailing" secondItem="BlP-sO-rO1" secondAttribute="trailing" id="b7F-pS-wWV"/>
-                            <constraint firstItem="OR4-Sz-kkN" firstAttribute="trailing" secondItem="6K8-xc-MXW" secondAttribute="trailing" constant="70" id="c4h-P1-CIw"/>
-                            <constraint firstItem="OR4-Sz-kkN" firstAttribute="bottom" secondItem="6K8-xc-MXW" secondAttribute="bottom" constant="70" id="jl7-0Y-d9n"/>
-                            <constraint firstItem="6K8-xc-MXW" firstAttribute="leading" secondItem="OR4-Sz-kkN" secondAttribute="leading" constant="70" id="rJB-4i-ZO5"/>
+                            <constraint firstItem="OR4-Sz-kkN" firstAttribute="trailing" secondItem="6K8-xc-MXW" secondAttribute="trailing" constant="100" id="c4h-P1-CIw"/>
+                            <constraint firstItem="WjK-uh-d9S" firstAttribute="top" secondItem="6K8-xc-MXW" secondAttribute="bottom" constant="160" id="jl7-0Y-d9n"/>
+                            <constraint firstItem="6K8-xc-MXW" firstAttribute="leading" secondItem="OR4-Sz-kkN" secondAttribute="leading" constant="100" id="rJB-4i-ZO5"/>
                             <constraint firstItem="WjK-uh-d9S" firstAttribute="leading" secondItem="OR4-Sz-kkN" secondAttribute="leading" id="zOH-XN-4cq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OR4-Sz-kkN"/>

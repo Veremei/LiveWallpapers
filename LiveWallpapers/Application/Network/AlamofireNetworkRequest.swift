@@ -14,7 +14,7 @@ class AlamofireNetworkRequest {
 //    static var onProgress: ((Double) -> ())?
 //    static var completed: ((String) -> ())?
     
-    static func sendRequest(url: String, completion: @escaping (_ courses: [Photo])->()) {
+    static func sendRequest(url: String, completion: @escaping (_ photos: [Photo],_ meta: Meta, _ links: Links)->()) {
         
         guard let url = URL(string: url) else { return }
         
@@ -24,17 +24,21 @@ class AlamofireNetworkRequest {
             switch response.result {
                 
             case .success(let value):
-                if let array = value as? JSON, let data = array["data"] as? [JSON] {
+                guard let array = value as? JSON,
+                    let data = array["data"] as? [JSON],
+                    let metaData = array["meta"] as? JSON,
+                    let linksData = array["links"] as? JSON else { return }
                     
                     var photos = [Photo]()
+                    let meta = Meta(json: metaData)
+                    let links = Links(json: linksData)
+                    
                     for dictionary in data {
                         guard let forecast = Photo(json: dictionary) else { continue }
                         photos.append(forecast)
                     }
                     print(photos)
-                    completion(photos)
-                }
-                
+                completion(photos,meta!,links!)
             case .failure(let error):
                 print(error)
             }
