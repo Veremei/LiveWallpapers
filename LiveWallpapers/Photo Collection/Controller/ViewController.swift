@@ -13,11 +13,14 @@ import SPPermission
 class ViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBAction func previousPageButton(_ sender: UIBarButtonItem) {
-        
+                    guard let linkPrev = links?.prev else {return}
+        url = linkPrev
     }
     
     @IBAction func nextPageButton(_ sender: UIBarButtonItem) {
-//        meta?.current_page =
+                    guard let linkNext = links?.next else {return}
+        url = linkNext
+
     }
     
     
@@ -27,7 +30,15 @@ class ViewController: UIViewController {
     private var links : Links?
     private var detailPhoto : Photo?
     
-    private let url = "https://wallpapers.mediacube.games/api/photos"
+    private var url = "https://wallpapers.mediacube.games/api/photos?page=1" {
+        didSet {
+//            guard let linkNext = links?.next else {return}
+//            guard let linkPrev = links?.prev else {return}
+            fetchDataWithAlamofire()
+
+
+        }
+    }
 
     var cellWidth: CGFloat = UIScreen.main.bounds.width / 3 - 4
     var cellHeight: CGFloat = UIScreen.main.bounds.height / 3.5
@@ -53,7 +64,7 @@ class ViewController: UIViewController {
             self?.meta = meta
             self?.links = links
 //            self?.downloadGroup.notify(queue: DispatchQueue.main) {
-
+print(links)
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
 //            }
