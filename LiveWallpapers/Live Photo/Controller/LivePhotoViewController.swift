@@ -21,6 +21,8 @@ class LivePhotoViewController: UIViewController {
     @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
     @IBOutlet weak var livePhotoView: PHLivePhotoView!
     @IBOutlet weak var saveBarButton: UIBarButtonItem!
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBOutlet weak var toolBar: UIToolbar!
     
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
         let isAllowedLibrary = SPPermission.isAllow(.photoLibrary)
@@ -53,6 +55,7 @@ class LivePhotoViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
         startDownload(from: urlArray) { [weak self] success in
             if success {
                 self?.makeLivePhotoFromItems()
@@ -138,12 +141,21 @@ class LivePhotoViewController: UIViewController {
     func setupRecognizers() {
         let longTapRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(recognizer:)))
         longTapRecognizer.minimumPressDuration = 0.2
+        let TapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
         livePhotoView.addGestureRecognizer(longTapRecognizer)
+        livePhotoView.addGestureRecognizer(TapRecognizer)
     }
     
     @objc func handleLongPress(recognizer: UIGestureRecognizer) {
         if recognizer.state == .began {
             self.livePhotoView.startPlayback(with: .full)
+        }
+    }
+    @objc func handleTap(recognizer: UIGestureRecognizer) {
+        if recognizer.state == .ended {
+//            self.navigationBar.hidesBackButton = !self.navigationBar.hidesBackButton
+            self.navigationController?.navigationBar.isHidden = !(self.navigationController?.navigationBar.isHidden)!
+            self.toolBar.isHidden = !self.toolBar.isHidden
         }
     }
     

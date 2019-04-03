@@ -154,7 +154,9 @@
                     <connections>
                         <outlet property="activityIndicatorView" destination="6K8-xc-MXW" id="WfY-d8-Ljc"/>
                         <outlet property="livePhotoView" destination="BlP-sO-rO1" id="vq9-by-QAd"/>
+                        <outlet property="navigationBar" destination="0Z5-HN-7Lh" id="bdx-0N-NXt"/>
                         <outlet property="saveBarButton" destination="nDW-je-lad" id="Uuj-iF-Geo"/>
+                        <outlet property="toolBar" destination="WjK-uh-d9S" id="x16-FK-LaI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mkb-cz-dXF" userLabel="First Responder" sceneMemberID="firstResponder"/>
