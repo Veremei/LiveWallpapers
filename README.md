@@ -1,8 +1,15 @@
 # LiveWallpapers
 
-App for downloading live wallpapers from server
+App for downloading live wallpapers
 
-Not done yet : 
-- Some UI freeze while scrolling large screen
+- LivePhoto
+- Alamofire
+- Nuke
+- Photo library
+- Toast messages(Loaf)
+- Allow request(SPPermission)
+- Collection View
+- Pagination and etc.
+
 
 Download and open LiveWallpapers.xcworkspace
