@@ -16,6 +16,8 @@ import NVActivityIndicatorView
 import SPPermission
 import Loaf
 
+// Need to organize/review
+
 class LivePhotoViewController: UIViewController {
     
     @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
@@ -96,7 +98,6 @@ class LivePhotoViewController: UIViewController {
                     completionHandler(false)
                 }
                 return (fileUrl, [.removePreviousFile, .createIntermediateDirectories])
-                
             }
             
             Alamofire.download(urlString, to: destination)
@@ -153,7 +154,6 @@ class LivePhotoViewController: UIViewController {
     }
     @objc func handleTap(recognizer: UIGestureRecognizer) {
         if recognizer.state == .ended {
-//            self.navigationBar.hidesBackButton = !self.navigationBar.hidesBackButton
             self.navigationController?.navigationBar.isHidden = !(self.navigationController?.navigationBar.isHidden)!
             self.toolBar.isHidden = !self.toolBar.isHidden
         }
@@ -162,7 +162,6 @@ class LivePhotoViewController: UIViewController {
     
     private func makeLivePhotoFromItems() {
         guard let imageURL = self.imageURL, let videoURL = self.videoURL, let _ = self.image else { return }
-        
         LivePhoto.generate(from: imageURL, videoURL: videoURL, progress: { percent in }, completion: { [weak self] livePhoto, resources in
             self?.livePhotoView.livePhoto = livePhoto
             self?.activityIndicatorView.stopAnimating()

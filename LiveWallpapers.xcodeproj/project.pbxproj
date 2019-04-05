@@ -109,7 +109,7 @@
 		1801C8ED225223D200A299F0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				183DD49722503247002AE011 /* LivePhoto.swift */,
+				181C83D92254EAB0005F3978 /* LivePhotoModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -127,6 +127,14 @@
 				183DD491224F9441002AE011 /* LivePhotoViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		181C83D92254EAB0005F3978 /* LivePhotoModel */ = {
+			isa = PBXGroup;
+			children = (
+				183DD49722503247002AE011 /* LivePhoto.swift */,
+			);
+			path = LivePhotoModel;
 			sourceTree = "<group>";
 		};
 		183DD493224F966B002AE011 /* Supporting Files */ = {
