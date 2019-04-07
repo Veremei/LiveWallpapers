@@ -2,7 +2,7 @@
 
 App for downloading live wallpapers
 
-- LivePhoto
+- LivePhoto(PHLivePhoto)
 - Alamofire
 - Nuke
 - Photo library
