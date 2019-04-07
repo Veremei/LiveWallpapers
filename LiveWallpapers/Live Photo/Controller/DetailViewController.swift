@@ -43,18 +43,16 @@ class DetailViewController: UIViewController,PHLivePhotoViewDelegate {
     var videoURL: URL?
     var urlArray : [String] = []
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        clearDirectory()
         if liveView == liveView {
-        
         activityIndicatorView.type = NVActivityIndicatorType.circleStrokeSpin
             activityIndicatorView.startAnimating()
             liveView.delegate = self
             liveView.isHidden = true
             saveBarButton.isEnabled = false
             setupRecognizers()
-
         }
     }
     
@@ -70,9 +68,9 @@ class DetailViewController: UIViewController,PHLivePhotoViewDelegate {
         }
     }
     
+    
     override func viewWillDisappear(_ animated: Bool) {
-        removeItem(itemName: "IMG", fileExtension: "JPG")
-        removeItem(itemName: "MOVE", fileExtension: "MOV")
+        clearDirectory()
     }
     
     
@@ -84,12 +82,9 @@ class DetailViewController: UIViewController,PHLivePhotoViewDelegate {
                 }
             }
         }
-        
         for urlString in array {
-            
             let fileUrl = self.getSaveFileUrl(fileName: urlString)
             let destination: DownloadRequest.DownloadFileDestination = { [weak self] _, _ in
-                
                 if fileUrl.pathExtension == "JPG" {
                     DispatchQueue.main.async {
                         self?.imageURL = fileUrl
@@ -125,37 +120,25 @@ class DetailViewController: UIViewController,PHLivePhotoViewDelegate {
         return fileURL;
     }
     
-    
-    func removeItem(itemName:String, fileExtension: String) {
-        let fileManager = FileManager.default
-        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
-        let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
-        let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-        guard let dirPath = paths.first else {
-            return
-        }
-        let filePath = "\(dirPath)/\(itemName).\(fileExtension)"
+    func clearDirectory() {
+        let documentsUrl =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         do {
-            try fileManager.removeItem(atPath: filePath)
-        } catch let error as NSError {
-            print(error.debugDescription)
-        }
+            let fileURLs = try FileManager.default.contentsOfDirectory(at: documentsUrl,
+                                                                       includingPropertiesForKeys: nil,
+                                                                       options: [.skipsHiddenFiles, .skipsSubdirectoryDescendants])
+            for fileURL in fileURLs {
+                if fileURL.pathExtension == "MOV" || fileURL.pathExtension == "JPG"  {
+                    try FileManager.default.removeItem(at: fileURL)
+                }
+            }
+        } catch  { print(error) }
     }
     
     func setupRecognizers() {
-        let longTapRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(recognizer:)))
-        longTapRecognizer.minimumPressDuration = 0.2
         let TapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
-        liveView.addGestureRecognizer(longTapRecognizer)
         liveView.addGestureRecognizer(TapRecognizer)
     }
-    
-    @objc func handleLongPress(recognizer: UILongPressGestureRecognizer) {
-        if recognizer.state == .began {
-            self.liveView.startPlayback(with: .full)
-        }
-    }
-    
+
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
         if recognizer.state == .ended {
             self.navigationController?.navigationBar.isHidden = !(self.navigationController?.navigationBar.isHidden)!
@@ -216,9 +199,6 @@ class DetailViewController: UIViewController,PHLivePhotoViewDelegate {
         })
     }
 }
-
-
-
 
 extension DetailViewController {
     func livePhotoView(_ livePhotoView: PHLivePhotoView, willBeginPlaybackWith playbackStyle: PHLivePhotoViewPlaybackStyle) {
