@@ -25,6 +25,7 @@ class DetailViewController: UIViewController,PHLivePhotoViewDelegate {
     @IBOutlet weak var saveBarButton: UIBarButtonItem!
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var toolBar: UIToolbar!
+    
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
         let isAllowedLibrary = SPPermission.isAllowed(.photoLibrary)
         if isAllowedLibrary == true {
