@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="04H-vD-ERN">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="04H-vD-ERN">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,11 +14,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LiveWallpapers" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="wZ1-rl-F0F">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="14" minimumInteritemSpacing="0.0" id="byd-2K-9hG">
                                     <size key="itemSize" width="124" height="220"/>
@@ -58,8 +57,9 @@
                                 </connections>
                             </collectionView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GOy-eD-jpM">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="692" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.17647058823529413" green="0.18823529411764706" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <items>
                                     <barButtonItem image="icons8-chevron-left-filled-90" id="A7b-oC-Obd">
                                         <color key="tintColor" red="0.25425239581415632" green="0.62363563128297006" blue="0.54713671495993288" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -87,6 +87,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <navigationItem key="navigationItem" id="J7x-z9-ArC"/>
                     <connections>
                         <outlet property="collectionView" destination="wZ1-rl-F0F" id="sUC-K2-fdm"/>
@@ -99,16 +100,16 @@
             </objects>
             <point key="canvasLocation" x="1036" y="132.68365817091455"/>
         </scene>
-        <!--Live Photo View Controller-->
+        <!--Detail View Controller-->
         <scene sceneID="mni-nr-31I">
             <objects>
-                <viewController id="Z6l-Z6-QMZ" customClass="LivePhotoViewController" customModule="LiveWallpapers" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Z6l-Z6-QMZ" customClass="DetailViewController" customModule="LiveWallpapers" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9D0-dN-SGa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6K8-xc-MXW" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                <rect key="frame" x="100" y="224" width="175" height="239"/>
+                                <rect key="frame" x="100" y="224" width="214" height="308"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="padding">
@@ -116,13 +117,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BlP-sO-rO1" customClass="PHLivePhotoView">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7bl-Ox-t86" customClass="PHLivePhotoView">
+                                <rect key="frame" x="0.0" y="64" width="414" height="672"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
-                                <gestureRecognizers/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WjK-uh-d9S">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="692" width="414" height="44"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="f9W-6j-RO0"/>
                                     <barButtonItem image="download" id="nDW-je-lad">
@@ -136,16 +136,16 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="BlP-sO-rO1" firstAttribute="top" secondItem="OR4-Sz-kkN" secondAttribute="top" id="B44-VW-UB4"/>
-                            <constraint firstItem="BlP-sO-rO1" firstAttribute="leading" secondItem="OR4-Sz-kkN" secondAttribute="leading" id="Dkb-95-Njc"/>
+                            <constraint firstItem="7bl-Ox-t86" firstAttribute="top" secondItem="OR4-Sz-kkN" secondAttribute="top" id="0uQ-Lo-DbP"/>
+                            <constraint firstItem="OR4-Sz-kkN" firstAttribute="bottom" secondItem="7bl-Ox-t86" secondAttribute="bottom" id="7dj-Pt-Q1W"/>
                             <constraint firstItem="WjK-uh-d9S" firstAttribute="trailing" secondItem="OR4-Sz-kkN" secondAttribute="trailing" id="J8t-PC-XEL"/>
                             <constraint firstItem="6K8-xc-MXW" firstAttribute="top" secondItem="OR4-Sz-kkN" secondAttribute="top" constant="160" id="K2d-W0-FZx"/>
                             <constraint firstItem="OR4-Sz-kkN" firstAttribute="bottom" secondItem="WjK-uh-d9S" secondAttribute="bottom" id="UGB-Mt-x5y"/>
-                            <constraint firstItem="OR4-Sz-kkN" firstAttribute="bottom" secondItem="BlP-sO-rO1" secondAttribute="bottom" id="YnF-uS-Ioo"/>
-                            <constraint firstItem="OR4-Sz-kkN" firstAttribute="trailing" secondItem="BlP-sO-rO1" secondAttribute="trailing" id="b7F-pS-wWV"/>
                             <constraint firstItem="OR4-Sz-kkN" firstAttribute="trailing" secondItem="6K8-xc-MXW" secondAttribute="trailing" constant="100" id="c4h-P1-CIw"/>
+                            <constraint firstItem="OR4-Sz-kkN" firstAttribute="trailing" secondItem="7bl-Ox-t86" secondAttribute="trailing" id="hpz-SN-0RA"/>
                             <constraint firstItem="WjK-uh-d9S" firstAttribute="top" secondItem="6K8-xc-MXW" secondAttribute="bottom" constant="160" id="jl7-0Y-d9n"/>
                             <constraint firstItem="6K8-xc-MXW" firstAttribute="leading" secondItem="OR4-Sz-kkN" secondAttribute="leading" constant="100" id="rJB-4i-ZO5"/>
+                            <constraint firstItem="7bl-Ox-t86" firstAttribute="leading" secondItem="OR4-Sz-kkN" secondAttribute="leading" id="yaI-xG-aSg"/>
                             <constraint firstItem="WjK-uh-d9S" firstAttribute="leading" secondItem="OR4-Sz-kkN" secondAttribute="leading" id="zOH-XN-4cq"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OR4-Sz-kkN"/>
@@ -153,7 +153,7 @@
                     <navigationItem key="navigationItem" id="0Z5-HN-7Lh"/>
                     <connections>
                         <outlet property="activityIndicatorView" destination="6K8-xc-MXW" id="WfY-d8-Ljc"/>
-                        <outlet property="livePhotoView" destination="BlP-sO-rO1" id="vq9-by-QAd"/>
+                        <outlet property="liveView" destination="7bl-Ox-t86" id="qbo-UD-TKp"/>
                         <outlet property="navigationBar" destination="0Z5-HN-7Lh" id="bdx-0N-NXt"/>
                         <outlet property="saveBarButton" destination="nDW-je-lad" id="Uuj-iF-Geo"/>
                         <outlet property="toolBar" destination="WjK-uh-d9S" id="x16-FK-LaI"/>
@@ -169,7 +169,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="04H-vD-ERN" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="KbQ-Zq-CNa">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.11607570048039799" green="0.13366472006625671" blue="0.18674083370657912" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
@@ -185,7 +185,7 @@
     </scenes>
     <resources>
         <image name="download" width="30" height="30"/>
-        <image name="icons8-chevron-left-filled-90" width="154.28572082519531" height="154.28572082519531"/>
-        <image name="icons8-chevron-right-filled-90" width="154.28572082519531" height="154.28572082519531"/>
+        <image name="icons8-chevron-left-filled-90" width="90" height="90"/>
+        <image name="icons8-chevron-right-filled-90" width="90" height="90"/>
     </resources>
 </document>

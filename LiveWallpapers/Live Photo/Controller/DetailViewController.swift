@@ -1,8 +1,8 @@
 //
-//  LivePhotoViewController.swift
+//  DetailViewController.swift
 //  LiveWallpapers
 //
-//  Created by apple on 30/03/2019.
+//  Created by Daniel on 4/7/19.
 //  Copyright © 2019 DAN. All rights reserved.
 //
 
@@ -18,16 +18,15 @@ import Loaf
 
 // Need to organize/review
 
-class LivePhotoViewController: UIViewController {
+class DetailViewController: UIViewController,PHLivePhotoViewDelegate {
     
+    @IBOutlet weak var liveView: PHLivePhotoView!
     @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
-    @IBOutlet weak var livePhotoView: PHLivePhotoView!
     @IBOutlet weak var saveBarButton: UIBarButtonItem!
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var toolBar: UIToolbar!
-    
     @IBAction func saveButton(_ sender: UIBarButtonItem) {
-        let isAllowedLibrary = SPPermission.isAllow(.photoLibrary)
+        let isAllowedLibrary = SPPermission.isAllowed(.photoLibrary)
         if isAllowedLibrary == true {
             savePhotoToLibrary()
         } else {
@@ -47,12 +46,16 @@ class LivePhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        livePhotoView.delegate = self
-        livePhotoView.isHidden = true
-        saveBarButton.isEnabled = false
-        setupRecognizers()
+        if liveView == liveView {
+        
         activityIndicatorView.type = NVActivityIndicatorType.circleStrokeSpin
-        activityIndicatorView.startAnimating()
+            activityIndicatorView.startAnimating()
+            liveView.delegate = self
+            liveView.isHidden = true
+            saveBarButton.isEnabled = false
+            setupRecognizers()
+
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -143,34 +146,35 @@ class LivePhotoViewController: UIViewController {
         let longTapRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(recognizer:)))
         longTapRecognizer.minimumPressDuration = 0.2
         let TapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
-        livePhotoView.addGestureRecognizer(longTapRecognizer)
-        livePhotoView.addGestureRecognizer(TapRecognizer)
+        liveView.addGestureRecognizer(longTapRecognizer)
+        liveView.addGestureRecognizer(TapRecognizer)
     }
     
-    @objc func handleLongPress(recognizer: UIGestureRecognizer) {
+    @objc func handleLongPress(recognizer: UILongPressGestureRecognizer) {
         if recognizer.state == .began {
-            self.livePhotoView.startPlayback(with: .full)
+            self.liveView.startPlayback(with: .full)
         }
     }
-    @objc func handleTap(recognizer: UIGestureRecognizer) {
+    
+    @objc func handleTap(recognizer: UITapGestureRecognizer) {
         if recognizer.state == .ended {
             self.navigationController?.navigationBar.isHidden = !(self.navigationController?.navigationBar.isHidden)!
             self.toolBar.isHidden = !self.toolBar.isHidden
         }
     }
-    
+
     
     private func makeLivePhotoFromItems() {
         guard let imageURL = self.imageURL, let videoURL = self.videoURL, let _ = self.image else { return }
         LivePhoto.generate(from: imageURL, videoURL: videoURL, progress: { percent in }, completion: { [weak self] livePhoto, resources in
-            self?.livePhotoView.livePhoto = livePhoto
+            self?.liveView.livePhoto = livePhoto
+            self?.liveView.startPlayback(with: .full)
+            self?.liveView.isHidden = false
             self?.activityIndicatorView.stopAnimating()
-            self?.livePhotoView.isHidden = false
             self?.saveBarButton.isEnabled = true
-            self?.livePhotoView.startPlayback(with: .full)
         })
     }
-    
+
     
     
     func popThisView() {
@@ -216,7 +220,7 @@ class LivePhotoViewController: UIViewController {
 
 
 
-extension LivePhotoViewController: PHLivePhotoViewDelegate {
+extension DetailViewController {
     func livePhotoView(_ livePhotoView: PHLivePhotoView, willBeginPlaybackWith playbackStyle: PHLivePhotoViewPlaybackStyle) {
         isPlayingHint = (playbackStyle == .hint)
     }

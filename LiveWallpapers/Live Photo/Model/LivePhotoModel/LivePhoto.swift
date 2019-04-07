@@ -261,7 +261,7 @@ class LivePhoto {
                             let percent:CGFloat = CGFloat(currentFrameCount)/CGFloat(frameCount)
                             progress(percent)
                             if !videoWriterInput.append(sampleBuffer) {
-                                print("Cannot write: \((describing: self.assetWriter?.error?.localizedDescription))")
+                                print("Cannot write: \(self.assetWriter?.error?.localizedDescription ?? "error")")
                                 self.videoReader?.cancelReading()
                             }
                         } else {

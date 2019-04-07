@@ -1,16 +1,16 @@
 PODS:
-  - Alamofire (4.8.1)
+  - Alamofire (4.8.2)
   - Loaf (0.4.0)
-  - Nuke (7.5.2)
-  - NVActivityIndicatorView (4.6.1):
-    - NVActivityIndicatorView/Presenter (= 4.6.1)
-  - NVActivityIndicatorView/Presenter (4.6.1)
-  - SPPermission (2.9.4)
+  - Nuke (7.6)
+  - NVActivityIndicatorView (4.7.0):
+    - NVActivityIndicatorView/Presenter (= 4.7.0)
+  - NVActivityIndicatorView/Presenter (4.7.0)
+  - SPPermission (3.0.5)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.7)
+  - Alamofire
   - Loaf
-  - Nuke (~> 7.0)
+  - Nuke
   - NVActivityIndicatorView
   - SPPermission
 
@@ -23,12 +23,12 @@ SPEC REPOS:
     - SPPermission
 
 SPEC CHECKSUMS:
-  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   Loaf: 070a55b75527d541e710f69c0c7642ead3676a96
-  Nuke: 0350d346a688426e8f2331253ef28dc2fc4f6178
-  NVActivityIndicatorView: 4ca19fccc84595a78957336a086d00a49be6ce61
-  SPPermission: 7c03fcc091f0f0bae7538b3fd87afcbd2634ca18
+  Nuke: aa1c6a5919b543debe814530881f2fccb58c26d4
+  NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
+  SPPermission: 6a6fcd3f5625dcb13c24de0d43fbfc4114f49532
 
-PODFILE CHECKSUM: c92e176a8b450fcaaefad88fd4780f643a26be45
+PODFILE CHECKSUM: 32af6397d4c65699b8e52554fda8ff4322eb7b3c
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.7.0.beta.3

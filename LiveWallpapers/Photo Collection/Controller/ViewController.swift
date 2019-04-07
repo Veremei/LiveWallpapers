@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         }
     }
     
-    var cellWidth: CGFloat = UIScreen.main.bounds.width / 3 - 8
+    var cellWidth: CGFloat = UIScreen.main.bounds.width / 3.2
     var cellHeight: CGFloat = UIScreen.main.bounds.height / 3.4
     
     
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let isAllowedLibrary = SPPermission.isAllow(.photoLibrary)
+        let isAllowedLibrary = SPPermission.isAllowed(.photoLibrary)
         if isAllowedLibrary == false {
             SPPermission.Dialog.request(with: [.photoLibrary], on: self)
         }
@@ -110,7 +110,7 @@ class ViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let livePhotoVC = segue.destination as? LivePhotoViewController {
+        if let livePhotoVC = segue.destination as? DetailViewController {
             guard let image = detailPhoto?.image,let move = detailPhoto?.movie else { return }
         livePhotoVC.urlArray = [image,move]
         }
@@ -162,7 +162,7 @@ extension ViewController: UICollectionViewDelegate,UICollectionViewDelegateFlowL
 
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 2, bottom: 10, right: 2)
+        return UIEdgeInsets(top: 10, left: 4, bottom: 10, right: 4)
     }
     
 }
