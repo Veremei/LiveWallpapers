@@ -32,7 +32,7 @@ class ViewController: UIViewController {
     private var links : Links?
     private var detailPhoto : Photo?
     
-    private var url = "https://wallpapers.mediacube.games/api/photos?page=1" {
+    private var url = "link" {
         didSet {
             fetchDataWithAlamofire()
         }
